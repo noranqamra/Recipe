@@ -1,13 +1,13 @@
 //
-//  Recipe_Search_DemoUITests.swift
-//  Recipe Search DemoUITests
+//  RecipeUITests.swift
+//  RecipeUITests
 //
 //  Created by Nouran Alaa on 22/08/2021.
 //
 
 import XCTest
 
-class Recipe_Search_DemoUITests: XCTestCase {
+class RecipeUITests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

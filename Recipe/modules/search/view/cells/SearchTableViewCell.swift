@@ -7,8 +7,13 @@
 
 import UIKit
 
-class SearchTableViewCell: UITableViewCell {
+class SearchTableViewCell: UITableViewCell{
+    @IBOutlet weak var searchNaameLabel: UILabel!
+    @IBOutlet weak var searchSourceLabel: UILabel!
+    @IBOutlet weak var searchHealthLabel: UILabel!
 
+    
+    @IBOutlet weak var searchImage: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

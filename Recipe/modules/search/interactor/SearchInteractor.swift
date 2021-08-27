@@ -6,3 +6,13 @@
 //
 
 import Foundation
+class SearchInteractor {
+    var network = NetworkManager()
+    func fetchRecipeData (completionHandler : @escaping (Any)-> Void, searchKeyword: String){
+        print(searchKeyword)
+        UserDefaults.standard.setUserSearch(key: searchKeyword)
+        network.fetchData(searchText : searchKeyword, completionHandler: completionHandler)
+    }
+    
+    
+}

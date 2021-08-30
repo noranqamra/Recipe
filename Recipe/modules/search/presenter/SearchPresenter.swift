@@ -33,8 +33,9 @@ class SearchPresenter {
 extension SearchPresenter : SearchOutput{
    
     func viewDidLoad() {
+        
         view?.initRecipeArray()
-     //   view?.setViewControllerDelegates() //to be implemented
+        view?.setViewControllerDelegates()
     }
     
     func didTapSearchTextField() {

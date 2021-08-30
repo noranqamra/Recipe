@@ -14,7 +14,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
     @IBOutlet weak var resultTableView: UITableView!
     @IBOutlet weak var historyTableView: UITableView!
 
-    var recipeArray = [Recipe]()
     var presenter : SearchOutput?
     var searchModel : SearchModel?
     var interactor = SearchInteractor()
@@ -24,12 +23,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         initPresenter()
-        searchBar.delegate = self
-        resultTableView.delegate = self
-        resultTableView.dataSource = self
-        historyTableView.delegate = self
-        historyTableView.dataSource = self
-        historyTableView.isHidden = true
+        setViewControllerDelegates()
         // Do any additional setup after loading the view.
     }
 
@@ -101,14 +95,22 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
 
 
 }
-struct Recipe{
-    let title : String
-    let source : String
-    let health : String
 
-}
 
 extension SearchViewController : SearchInput{
+    func setViewControllerDelegates() {
+        searchBar.delegate = self
+        resultTableView.delegate = self
+        resultTableView.dataSource = self
+        historyTableView.delegate = self
+        historyTableView.dataSource = self
+        historyTableView.isHidden = true
+    }
+    
+    func initRecipeArray() {
+    
+    }
+    
     func showRecipe() {
 
     }
@@ -121,14 +123,6 @@ extension SearchViewController : SearchInput{
 
     }
 
-    func initRecipeArray() {
-        recipeArray.append(Recipe(title : "Title" , source : "Source" , health : "Health Labels"))
-        recipeArray.append(Recipe(title : "Title" , source : "Source" , health : "Health Labels"))
-        recipeArray.append(Recipe(title : "Title" , source : "Source" , health : "Health Labels"))
-        recipeArray.append(Recipe(title : "Title" , source : "Source" , health : "Health Labels"))
-        recipeArray.append(Recipe(title : "Title" , source : "Source" , health : "Health Labels"))
-
-    }
 
     func showAvailableSuggestions() {
 

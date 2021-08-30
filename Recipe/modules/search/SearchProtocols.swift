@@ -21,6 +21,7 @@ protocol SearchInput : class {
     func showError()
     func updateView()
     func initRecipeArray()
+    func setViewControllerDelegates()
     func getSearchBarText () -> String
     func setSearchModel(searchModel : SearchModel)
     

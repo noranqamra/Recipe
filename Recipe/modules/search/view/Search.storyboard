@@ -81,7 +81,7 @@
                                 </cells>
                             </collectionView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Nd5-nS-rmm">
-                                <rect key="frame" x="0.0" y="174" width="414" height="722"/>
+                                <rect key="frame" x="0.0" y="174" width="414" height="688"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchTableViewCell" rowHeight="186" id="KBw-gT-YxF" customClass="SearchTableViewCell" customModule="Recipe" customModuleProvider="target">
@@ -140,29 +140,52 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Wlw-96-Dr2">
+                                <rect key="frame" x="0.0" y="106" width="414" height="756"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="tBN-2i-8CZ"/>
                         <constraints>
                             <constraint firstItem="yYM-Ub-L8j" firstAttribute="top" secondItem="bCl-VX-umy" secondAttribute="top" constant="50" id="4us-A1-bTi"/>
                             <constraint firstItem="Nd5-nS-rmm" firstAttribute="top" secondItem="9cY-ZD-rKY" secondAttribute="bottom" id="54l-OX-NLS"/>
-                            <constraint firstAttribute="bottom" secondItem="Nd5-nS-rmm" secondAttribute="bottom" id="Lbe-Pe-jrn"/>
+                            <constraint firstItem="Wlw-96-Dr2" firstAttribute="top" secondItem="yYM-Ub-L8j" secondAttribute="bottom" id="JNY-dT-Xc3"/>
+                            <constraint firstItem="tBN-2i-8CZ" firstAttribute="bottom" secondItem="Nd5-nS-rmm" secondAttribute="bottom" id="Lbe-Pe-jrn"/>
                             <constraint firstItem="9cY-ZD-rKY" firstAttribute="top" secondItem="yYM-Ub-L8j" secondAttribute="bottom" id="UDT-7f-Mmg"/>
                             <constraint firstItem="Nd5-nS-rmm" firstAttribute="leading" secondItem="tBN-2i-8CZ" secondAttribute="leading" id="cjV-nv-z11"/>
+                            <constraint firstItem="Wlw-96-Dr2" firstAttribute="leading" secondItem="tBN-2i-8CZ" secondAttribute="leading" id="hSR-9H-nne"/>
+                            <constraint firstItem="Wlw-96-Dr2" firstAttribute="trailing" secondItem="tBN-2i-8CZ" secondAttribute="trailing" id="iGU-M1-KM1"/>
                             <constraint firstItem="9cY-ZD-rKY" firstAttribute="trailing" secondItem="tBN-2i-8CZ" secondAttribute="trailing" id="lGG-xy-YAB"/>
                             <constraint firstItem="9cY-ZD-rKY" firstAttribute="leading" secondItem="tBN-2i-8CZ" secondAttribute="leading" id="mEC-Wf-ULj"/>
+                            <constraint firstItem="tBN-2i-8CZ" firstAttribute="bottom" secondItem="Wlw-96-Dr2" secondAttribute="bottom" id="ocy-el-6uz"/>
                             <constraint firstItem="yYM-Ub-L8j" firstAttribute="leading" secondItem="tBN-2i-8CZ" secondAttribute="leading" id="s82-d5-5h6"/>
                             <constraint firstItem="Nd5-nS-rmm" firstAttribute="trailing" secondItem="tBN-2i-8CZ" secondAttribute="trailing" id="v5t-XP-TRX"/>
                             <constraint firstItem="yYM-Ub-L8j" firstAttribute="trailing" secondItem="tBN-2i-8CZ" secondAttribute="trailing" id="vE7-Lv-Xr2"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="historyTableView" destination="Wlw-96-Dr2" id="cZz-Z8-TfJ"/>
+                        <outlet property="resultTableView" destination="Nd5-nS-rmm" id="U6N-ry-dAM"/>
                         <outlet property="searchBar" destination="yYM-Ub-L8j" id="LpG-KE-Qnm"/>
-                        <outlet property="tableView" destination="Nd5-nS-rmm" id="U6N-ry-dAM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TRK-r3-FMN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-407.24637681159425" y="-29.464285714285712"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="bY9-0F-SlC">
+            <objects>
+                <viewController id="rCf-XO-iwE" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Vzm-mO-DZQ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ixs-Ve-1fC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-829" y="-417"/>
         </scene>
     </scenes>
     <resources>

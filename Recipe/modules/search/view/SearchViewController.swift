@@ -23,34 +23,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         initPresenter()
-        setViewControllerDelegates()
+        presenter?.viewDidLoad()
+
         // Do any additional setup after loading the view.
-    }
-
-
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {     //presenter
-        searchBarText = searchBar.text
-        print("searchTexter \(searchBarText)")
-        historyTableView.isHidden = true
-        presenter?.didTapSearchTextField()
-        UserDefaults.setUserSearch(key: searchBarText ?? "Error" )
-        history = UserDefaults.getUserSearch()
-        historyTableView.reloadData()
-    }
-
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searchBar.showsCancelButton = true
-        historyTableView.isHidden = history.isEmpty
-    }
-
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        historyTableView.isHidden = true
-    }
-
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {  //presenter
-        searchBar.showsCancelButton = false
-        self.view.endEditing(true)
-        historyTableView.isHidden = true
     }
 
     // MARK: -
@@ -73,7 +48,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath ) as! SearchTableViewCell
-            cell.searchNaameLabel.text = searchModel?.hits[indexPath.row].recipe.label
+            cell.searchNameLabel.text = searchModel?.hits[indexPath.row].recipe.label
             let url = URL(string: searchModel?.hits[indexPath.row].recipe.image ??  "")
             cell.searchImage.kf.setImage(with: url,options: [.cacheOriginalImage])
             cell.searchSourceLabel.text = searchModel?.hits[indexPath.row].recipe.source
@@ -92,6 +67,10 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
             presenter?.didTapSearchTextField()
         }
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
 
 
 }
@@ -104,6 +83,30 @@ extension SearchViewController : SearchInput{
         resultTableView.dataSource = self
         historyTableView.delegate = self
         historyTableView.dataSource = self
+        historyTableView.isHidden = true
+    }
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {     //presenter
+        searchBarText = searchBar.text
+        print("searchTexter \(searchBarText)")
+        historyTableView.isHidden = true
+        presenter?.didTapSearchTextField()
+        UserDefaults.setUserSearch(key: searchBarText ?? "Error" )
+        history = UserDefaults.getUserSearch()
+        historyTableView.reloadData()
+    }
+
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = true
+        historyTableView.isHidden = history.isEmpty
+    }
+
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        historyTableView.isHidden = true
+    }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {  //presenter
+        searchBar.showsCancelButton = false
+        self.view.endEditing(true)
         historyTableView.isHidden = true
     }
     
@@ -132,10 +135,12 @@ extension SearchViewController : SearchInput{
     }
     func setSearchModel(searchModel : SearchModel){
         self.searchModel = searchModel
-      //  history = UserDefaults.standard.getUserSearch()
         resultTableView.reloadData()
-//        historyTableView.reloadData()
         self.view.endEditing(true)
+    }
+    func cellNIBFile (){
+        let cellNib = UINib(nibName: "SearchTableViewCell", bundle: nil)
+        resultTableView.register(cellNib, forCellReuseIdentifier: "SearchTableViewCell")
     }
 
 }

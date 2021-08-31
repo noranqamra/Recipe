@@ -132,10 +132,10 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="searchHealthLabel" destination="txV-lN-bHW" id="xXO-PQ-ZWb"/>
-                                            <outlet property="searchImage" destination="i5S-59-3VB" id="edx-md-18x"/>
-                                            <outlet property="searchNaameLabel" destination="YT7-if-Vft" id="kol-Qm-IDp"/>
-                                            <outlet property="searchSourceLabel" destination="DFc-ek-7no" id="mBN-JV-Tp2"/>
+                                            <outlet property="searchHealthLabel" destination="txV-lN-bHW" id="COl-Q8-ceA"/>
+                                            <outlet property="searchImage" destination="i5S-59-3VB" id="0AQ-uf-He5"/>
+                                            <outlet property="searchNaameLabel" destination="YT7-if-Vft" id="YCz-8n-Ipb"/>
+                                            <outlet property="searchSourceLabel" destination="DFc-ek-7no" id="l79-Ne-Luj"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -172,20 +172,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TRK-r3-FMN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-407.24637681159425" y="-29.464285714285712"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="bY9-0F-SlC">
-            <objects>
-                <viewController id="rCf-XO-iwE" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Vzm-mO-DZQ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ixs-Ve-1fC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-829" y="-417"/>
         </scene>
     </scenes>
     <resources>

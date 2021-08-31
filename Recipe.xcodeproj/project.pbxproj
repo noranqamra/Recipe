@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		5604930A26D4F34D00268D3E /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5604930926D4F34D00268D3E /* File.swift */; };
-		564C37DC26D7F547001C173F /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564C37DB26D7F547001C173F /* SearchTableViewCell.swift */; };
+		562EF67526DD22E200336DB3 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562EF67326DD22E200336DB3 /* SearchTableViewCell.swift */; };
+		562EF67626DD22E200336DB3 /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 562EF67426DD22E200336DB3 /* SearchTableViewCell.xib */; };
 		565EEEAA26D551FE00AF60A7 /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565EEEA926D551FE00AF60A7 /* SearchModel.swift */; };
 		5669EFF226D3A7C1001B6EC5 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5669EFF126D3A7C1001B6EC5 /* Search.storyboard */; };
 		567B75B526D29CE500AF0EFA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567B75B426D29CE500AF0EFA /* AppDelegate.swift */; };
@@ -48,7 +49,8 @@
 /* Begin PBXFileReference section */
 		2B03ACC50B1246029F6B75F4 /* Pods-Recipe-RecipeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recipe-RecipeUITests.debug.xcconfig"; path = "Target Support Files/Pods-Recipe-RecipeUITests/Pods-Recipe-RecipeUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		5604930926D4F34D00268D3E /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
-		564C37DB26D7F547001C173F /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
+		562EF67326DD22E200336DB3 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
+		562EF67426DD22E200336DB3 /* SearchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
 		565EEEA926D551FE00AF60A7 /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
 		5669EFF126D3A7C1001B6EC5 /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		567B75B126D29CE500AF0EFA /* Recipe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recipe.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -257,7 +259,8 @@
 		56D034F326D3B46900863BBA /* cells */ = {
 			isa = PBXGroup;
 			children = (
-				564C37DB26D7F547001C173F /* SearchTableViewCell.swift */,
+				562EF67326DD22E200336DB3 /* SearchTableViewCell.swift */,
+				562EF67426DD22E200336DB3 /* SearchTableViewCell.xib */,
 			);
 			path = cells;
 			sourceTree = "<group>";
@@ -381,6 +384,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				567B75BE26D29D0300AF0EFA /* Assets.xcassets in Resources */,
+				562EF67626DD22E200336DB3 /* SearchTableViewCell.xib in Resources */,
 				567B75BC26D29CE500AF0EFA /* Main.storyboard in Resources */,
 				5669EFF226D3A7C1001B6EC5 /* Search.storyboard in Resources */,
 			);
@@ -514,7 +518,7 @@
 				567B75B526D29CE500AF0EFA /* AppDelegate.swift in Sources */,
 				56D034FA26D3B57500863BBA /* SearchPresenter.swift in Sources */,
 				565EEEAA26D551FE00AF60A7 /* SearchModel.swift in Sources */,
-				564C37DC26D7F547001C173F /* SearchTableViewCell.swift in Sources */,
+				562EF67526DD22E200336DB3 /* SearchTableViewCell.swift in Sources */,
 				56D0350426D3B90A00863BBA /* SearchProtocols.swift in Sources */,
 				56D034FF26D3B59900863BBA /* SearchRouter.swift in Sources */,
 				56D034EC26D3B43D00863BBA /* SearchViewController.swift in Sources */,

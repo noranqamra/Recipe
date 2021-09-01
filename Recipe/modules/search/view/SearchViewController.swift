@@ -8,64 +8,74 @@
 import UIKit
 import Kingfisher
 class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource{
-
-
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var resultTableView: UITableView!
-    @IBOutlet weak var historyTableView: UITableView!
+    @IBOutlet weak var historyContainerView: UIView!
+    
 
     var presenter : SearchOutput?
     var searchModel : SearchModel?
     var interactor = SearchInteractor()
     var searchBarText: String?
-    var history: [String] = []
 
+    private lazy var historyViewController: HistoryViewController = {
+    // Load Storyboard
+    let storyboard = UIStoryboard(name: "Search", bundle: Bundle.main)
+
+    // Instantiate View Controller
+    var viewController = storyboard.instantiateViewController(withIdentifier: "HistoryViewController") as! HistoryViewController
+
+    // Add View Controller as Child View Controller
+        self.addViewControllerAsChild(asChildViewController: viewController)
+
+    return viewController
+    }()
+
+    private func remove(asChildViewController viewController: UIViewController) {
+    // Notify Child View Controller
+        viewController.willMove(toParent: nil)
+
+    // Remove Child View From Superview
+    viewController.view.removeFromSuperview()
+
+    // Notify Child View Controller
+        viewController.removeFromParent()
+    }
+    func addViewControllerAsChild(asChildViewController: UIViewController) {
+    asChildViewController.view.frame = historyContainerView.bounds
+    asChildViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+    historyContainerView.addSubview(asChildViewController.view)
+        asChildViewController.viewDidLoad()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         initPresenter()
         presenter?.viewDidLoad()
-
+        //a7otaha fl setup 3shan tt call mn el star el foo2
+        historyAddContainer()
         // Do any additional setup after loading the view.
     }
-
     // MARK: -
     private func initPresenter(){
         presenter = SearchPresenter(view: self, router : SearchRouter(), interactor: SearchInteractor())
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView == historyTableView {
-            return history.count
-        } else {
-            return searchModel?.hits.count ?? 0
-        }
-    }
 
+            return searchModel?.hits.count ?? 0
+        
+    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if tableView == historyTableView {
-            let cell = UITableViewCell(style: .default, reuseIdentifier: "Cell")
-            cell.textLabel?.text = history[indexPath.row]
-            return cell
-        } else {
+
             let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath ) as! SearchTableViewCell
-            cell.searchNameLabel.text = searchModel?.hits[indexPath.row].recipe.label
-            let url = URL(string: searchModel?.hits[indexPath.row].recipe.image ??  "")
-            cell.searchImage.kf.setImage(with: url,options: [.cacheOriginalImage])
-            cell.searchSourceLabel.text = searchModel?.hits[indexPath.row].recipe.source
-            cell.searchHealthLabel.text = searchModel?.hits[indexPath.row].recipe.healthLabels.joined(separator: " - ")
+        cell.configureCell(recipe: searchModel?.hits[indexPath.row].recipe)
             return cell
-        }
         
         
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if tableView == historyTableView {
-            searchBar.text = history[indexPath.row]
-            searchBarText = history[indexPath.row]
-            historyTableView.isHidden = true
-            presenter?.didTapSearchTextField()
-        }
+
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -77,37 +87,37 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
 
 
 extension SearchViewController : SearchInput{
+    func historyAddContainer(){
+        addViewControllerAsChild(asChildViewController: historyViewController)
+    }
     func setViewControllerDelegates() {
         searchBar.delegate = self
         resultTableView.delegate = self
         resultTableView.dataSource = self
-        historyTableView.delegate = self
-        historyTableView.dataSource = self
-        historyTableView.isHidden = true
+        historyContainerView.isHidden = true
     }
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {     //presenter
         searchBarText = searchBar.text
         print("searchTexter \(searchBarText)")
-        historyTableView.isHidden = true
+        historyContainerView.isHidden = true
         presenter?.didTapSearchTextField()
         UserDefaults.setUserSearch(key: searchBarText ?? "Error" )
-        history = UserDefaults.getUserSearch()
-        historyTableView.reloadData()
+
     }
 
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = true
-        historyTableView.isHidden = history.isEmpty
+        historyContainerView.isHidden = false
     }
 
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        historyTableView.isHidden = true
+        historyContainerView.isHidden = true
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {  //presenter
         searchBar.showsCancelButton = false
         self.view.endEditing(true)
-        historyTableView.isHidden = true
+        historyContainerView.isHidden = true
     }
     
     func initRecipeArray() {
@@ -143,21 +153,6 @@ extension SearchViewController : SearchInput{
         resultTableView.register(cellNib, forCellReuseIdentifier: "SearchTableViewCell")
     }
 
-}
-extension UserDefaults {
-   static func setUserSearch(key: String) {
-        var array = getUserSearch()
-        if !array.contains(key) {
-            array.append(key)
-        }
-        if array.count > 10 { array.removeFirst() }
-        UserDefaults.standard.set(array, forKey: "SEARCHED_DATA")
-        
-    }
-    static func getUserSearch() -> [String] {
-        guard let array = UserDefaults.standard.object(forKey: "SEARCHED_DATA") as? [String] else { return [] }
-        return array
-    }
 }
 
 

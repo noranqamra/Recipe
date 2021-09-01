@@ -140,31 +140,30 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Wlw-96-Dr2">
-                                <rect key="frame" x="0.0" y="106" width="414" height="756"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </tableView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bPW-CG-7so">
+                                <rect key="frame" x="0.0" y="174" width="414" height="688"/>
+                            </containerView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="tBN-2i-8CZ"/>
                         <constraints>
                             <constraint firstItem="yYM-Ub-L8j" firstAttribute="top" secondItem="bCl-VX-umy" secondAttribute="top" constant="50" id="4us-A1-bTi"/>
                             <constraint firstItem="Nd5-nS-rmm" firstAttribute="top" secondItem="9cY-ZD-rKY" secondAttribute="bottom" id="54l-OX-NLS"/>
-                            <constraint firstItem="Wlw-96-Dr2" firstAttribute="top" secondItem="yYM-Ub-L8j" secondAttribute="bottom" id="JNY-dT-Xc3"/>
+                            <constraint firstItem="bPW-CG-7so" firstAttribute="top" secondItem="9cY-ZD-rKY" secondAttribute="bottom" id="9xN-5N-SFw"/>
+                            <constraint firstItem="tBN-2i-8CZ" firstAttribute="bottom" secondItem="bPW-CG-7so" secondAttribute="bottom" id="AiQ-bC-4ZY"/>
                             <constraint firstItem="tBN-2i-8CZ" firstAttribute="bottom" secondItem="Nd5-nS-rmm" secondAttribute="bottom" id="Lbe-Pe-jrn"/>
                             <constraint firstItem="9cY-ZD-rKY" firstAttribute="top" secondItem="yYM-Ub-L8j" secondAttribute="bottom" id="UDT-7f-Mmg"/>
+                            <constraint firstItem="tBN-2i-8CZ" firstAttribute="trailing" secondItem="bPW-CG-7so" secondAttribute="trailing" id="VzI-8j-3gY"/>
                             <constraint firstItem="Nd5-nS-rmm" firstAttribute="leading" secondItem="tBN-2i-8CZ" secondAttribute="leading" id="cjV-nv-z11"/>
-                            <constraint firstItem="Wlw-96-Dr2" firstAttribute="leading" secondItem="tBN-2i-8CZ" secondAttribute="leading" id="hSR-9H-nne"/>
-                            <constraint firstItem="Wlw-96-Dr2" firstAttribute="trailing" secondItem="tBN-2i-8CZ" secondAttribute="trailing" id="iGU-M1-KM1"/>
+                            <constraint firstItem="bPW-CG-7so" firstAttribute="leading" secondItem="tBN-2i-8CZ" secondAttribute="leading" id="iQQ-Ti-9ej"/>
                             <constraint firstItem="9cY-ZD-rKY" firstAttribute="trailing" secondItem="tBN-2i-8CZ" secondAttribute="trailing" id="lGG-xy-YAB"/>
                             <constraint firstItem="9cY-ZD-rKY" firstAttribute="leading" secondItem="tBN-2i-8CZ" secondAttribute="leading" id="mEC-Wf-ULj"/>
-                            <constraint firstItem="tBN-2i-8CZ" firstAttribute="bottom" secondItem="Wlw-96-Dr2" secondAttribute="bottom" id="ocy-el-6uz"/>
                             <constraint firstItem="yYM-Ub-L8j" firstAttribute="leading" secondItem="tBN-2i-8CZ" secondAttribute="leading" id="s82-d5-5h6"/>
                             <constraint firstItem="Nd5-nS-rmm" firstAttribute="trailing" secondItem="tBN-2i-8CZ" secondAttribute="trailing" id="v5t-XP-TRX"/>
                             <constraint firstItem="yYM-Ub-L8j" firstAttribute="trailing" secondItem="tBN-2i-8CZ" secondAttribute="trailing" id="vE7-Lv-Xr2"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="historyTableView" destination="Wlw-96-Dr2" id="cZz-Z8-TfJ"/>
+                        <outlet property="historyContainerView" destination="bPW-CG-7so" id="O4h-SG-DZP"/>
                         <outlet property="resultTableView" destination="Nd5-nS-rmm" id="U6N-ry-dAM"/>
                         <outlet property="searchBar" destination="yYM-Ub-L8j" id="LpG-KE-Qnm"/>
                     </connections>
@@ -172,6 +171,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TRK-r3-FMN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-407.24637681159425" y="-29.464285714285712"/>
+        </scene>
+        <!--History-->
+        <scene sceneID="Trk-PE-x61">
+            <objects>
+                <viewControllerPlaceholder storyboardName="History" id="wjt-LO-pA3" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="McY-cp-Fa0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="297" y="-201"/>
         </scene>
     </scenes>
     <resources>

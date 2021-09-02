@@ -51,7 +51,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
         super.viewDidLoad()
         initPresenter()
         presenter?.viewDidLoad()
-        //a7otaha fl setup 3shan tt call mn el star el foo2
         historyAddContainer()
         // Do any additional setup after loading the view.
     }
@@ -65,10 +64,15 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
             return searchModel?.hits.count ?? 0
         
     }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
             let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath ) as! SearchTableViewCell
-        cell.configureCell(recipe: searchModel?.hits[indexPath.row].recipe)
+            cell.searchNameLabel.text = searchModel?.hits[indexPath.row].recipe.label
+            let url = URL(string: searchModel?.hits[indexPath.row].recipe.image ??  "")
+            cell.searchImage.kf.setImage(with: url,options: [.cacheOriginalImage])
+            cell.searchSourceLabel.text = searchModel?.hits[indexPath.row].recipe.source
+            cell.searchHealthLabel.text = searchModel?.hits[indexPath.row].recipe.healthLabels.joined(separator: " - ")
             return cell
         
         
@@ -94,12 +98,12 @@ extension SearchViewController : SearchInput{
         searchBar.delegate = self
         resultTableView.delegate = self
         resultTableView.dataSource = self
-        historyContainerView.isHidden = true
+//        historyContainerView.isHidden = true
     }
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {     //presenter
         searchBarText = searchBar.text
         print("searchTexter \(searchBarText)")
-        historyContainerView.isHidden = true
+//        historyContainerView.isHidden = true
         presenter?.didTapSearchTextField()
         UserDefaults.setUserSearch(key: searchBarText ?? "Error" )
 
@@ -111,13 +115,13 @@ extension SearchViewController : SearchInput{
     }
 
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        historyContainerView.isHidden = true
+//        historyContainerView.isHidden = true
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {  //presenter
         searchBar.showsCancelButton = false
         self.view.endEditing(true)
-        historyContainerView.isHidden = true
+//        historyContainerView.isHidden = true
     }
     
     func initRecipeArray() {

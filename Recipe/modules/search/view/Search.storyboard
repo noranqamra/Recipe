@@ -142,6 +142,9 @@
                             </tableView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bPW-CG-7so">
                                 <rect key="frame" x="0.0" y="174" width="414" height="688"/>
+                                <connections>
+                                    <segue destination="OzI-bb-q5E" kind="embed" id="fo7-JW-VOH"/>
+                                </connections>
                             </containerView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="tBN-2i-8CZ"/>
@@ -164,6 +167,7 @@
                     </view>
                     <connections>
                         <outlet property="historyContainerView" destination="bPW-CG-7so" id="O4h-SG-DZP"/>
+                        <outlet property="historyTableView" destination="Wlw-96-Dr2" id="cZz-Z8-TfJ"/>
                         <outlet property="resultTableView" destination="Nd5-nS-rmm" id="U6N-ry-dAM"/>
                         <outlet property="searchBar" destination="yYM-Ub-L8j" id="LpG-KE-Qnm"/>
                     </connections>
@@ -172,13 +176,45 @@
             </objects>
             <point key="canvasLocation" x="-407.24637681159425" y="-29.464285714285712"/>
         </scene>
-        <!--History-->
-        <scene sceneID="Trk-PE-x61">
+        <!--History View Controller-->
+        <scene sceneID="Z1V-DZ-0Su">
             <objects>
-                <viewControllerPlaceholder storyboardName="History" id="wjt-LO-pA3" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="McY-cp-Fa0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="HistoryViewController" id="OzI-bb-q5E" customClass="HistoryViewController" customModule="Recipe" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="M14-DZ-nfq">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="688"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Wlw-96-Dr2">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="688"/>
+                                <color key="backgroundColor" systemColor="systemRedColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HistoryCell" id="Wk6-4x-6w0">
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Wk6-4x-6w0" id="WIV-PQ-CmH">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Hgc-B1-VsW"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Wlw-96-Dr2" secondAttribute="trailing" id="Hik-Jx-nSy"/>
+                            <constraint firstItem="Wlw-96-Dr2" firstAttribute="top" secondItem="M14-DZ-nfq" secondAttribute="top" id="cIx-Wg-Rkd"/>
+                            <constraint firstAttribute="bottom" secondItem="Wlw-96-Dr2" secondAttribute="bottom" id="wuh-nz-zsn"/>
+                            <constraint firstItem="Wlw-96-Dr2" firstAttribute="leading" secondItem="M14-DZ-nfq" secondAttribute="leading" id="xLX-Au-Luq"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="historyTableView" destination="Wlw-96-Dr2" id="uIU-hz-T0X"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ags-Xu-0mP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="297" y="-201"/>
+            <point key="canvasLocation" x="909" y="-161"/>
         </scene>
     </scenes>
     <resources>
@@ -188,6 +224,9 @@
         </systemColor>
         <systemColor name="systemGray5Color">
             <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

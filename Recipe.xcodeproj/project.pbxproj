@@ -10,8 +10,6 @@
 		5604930A26D4F34D00268D3E /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5604930926D4F34D00268D3E /* File.swift */; };
 		562EF67526DD22E200336DB3 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562EF67326DD22E200336DB3 /* SearchTableViewCell.swift */; };
 		562EF67626DD22E200336DB3 /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 562EF67426DD22E200336DB3 /* SearchTableViewCell.xib */; };
-		565014BD26DFBE2B004355D6 /* History.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 565014BC26DFBE2B004355D6 /* History.storyboard */; };
-		565014BF26DFC255004355D6 /* HistoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565014BE26DFC255004355D6 /* HistoryPresenter.swift */; };
 		565EEEAA26D551FE00AF60A7 /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565EEEA926D551FE00AF60A7 /* SearchModel.swift */; };
 		5669EFF226D3A7C1001B6EC5 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5669EFF126D3A7C1001B6EC5 /* Search.storyboard */; };
 		567B75B526D29CE500AF0EFA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567B75B426D29CE500AF0EFA /* AppDelegate.swift */; };
@@ -54,8 +52,6 @@
 		5604930926D4F34D00268D3E /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		562EF67326DD22E200336DB3 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		562EF67426DD22E200336DB3 /* SearchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
-		565014BC26DFBE2B004355D6 /* History.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = History.storyboard; sourceTree = "<group>"; };
-		565014BE26DFC255004355D6 /* HistoryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryPresenter.swift; sourceTree = "<group>"; };
 		565EEEA926D551FE00AF60A7 /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
 		5669EFF126D3A7C1001B6EC5 /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		567B75B126D29CE500AF0EFA /* Recipe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recipe.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,23 +122,6 @@
 				ED0B78197E6861E9E72B2AD0 /* Pods-RecipeTests.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		565014BA26DFB380004355D6 /* view */ = {
-			isa = PBXGroup;
-			children = (
-				56C465A126DE99AD002B7A89 /* HistoryViewController.swift */,
-				565014BC26DFBE2B004355D6 /* History.storyboard */,
-			);
-			path = view;
-			sourceTree = "<group>";
-		};
-		565014BB26DFB38A004355D6 /* presenter */ = {
-			isa = PBXGroup;
-			children = (
-				565014BE26DFC255004355D6 /* HistoryPresenter.swift */,
-			);
-			path = presenter;
 			sourceTree = "<group>";
 		};
 		5669EFA726D39A59001B6EC5 /* utils */ = {
@@ -267,8 +246,7 @@
 		56C465A026DE9942002B7A89 /* history */ = {
 			isa = PBXGroup;
 			children = (
-				565014BA26DFB380004355D6 /* view */,
-				565014BB26DFB38A004355D6 /* presenter */,
+				56C465A126DE99AD002B7A89 /* HistoryViewController.swift */,
 			);
 			path = history;
 			sourceTree = "<group>";
@@ -419,7 +397,6 @@
 				567B75BE26D29D0300AF0EFA /* Assets.xcassets in Resources */,
 				562EF67626DD22E200336DB3 /* SearchTableViewCell.xib in Resources */,
 				567B75BC26D29CE500AF0EFA /* Main.storyboard in Resources */,
-				565014BD26DFBE2B004355D6 /* History.storyboard in Resources */,
 				5669EFF226D3A7C1001B6EC5 /* Search.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -551,7 +528,6 @@
 				567B75B926D29CE500AF0EFA /* ViewController.swift in Sources */,
 				567B75B526D29CE500AF0EFA /* AppDelegate.swift in Sources */,
 				56D034FA26D3B57500863BBA /* SearchPresenter.swift in Sources */,
-				565014BF26DFC255004355D6 /* HistoryPresenter.swift in Sources */,
 				56C465A226DE99AD002B7A89 /* HistoryViewController.swift in Sources */,
 				565EEEAA26D551FE00AF60A7 /* SearchModel.swift in Sources */,
 				562EF67526DD22E200336DB3 /* SearchTableViewCell.swift in Sources */,

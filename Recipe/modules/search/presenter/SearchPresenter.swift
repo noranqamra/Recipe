@@ -13,7 +13,7 @@ class SearchPresenter {
     var router : SearchRouter?
     var interactor : SearchInteractor?
     
-    let set = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ ")
+    let set = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ \n")
 
     init(view : SearchInput , router : SearchRouter, interactor : SearchInteractor){
         self.view = view
@@ -22,7 +22,9 @@ class SearchPresenter {
         self.interactor = interactor
     }
     private func fetchRecipeData(){
-        if ((view?.getSearchBarText() != "") && ((view?.getSearchBarText().rangeOfCharacter(from: set.inverted)) != nil)){
+//        && ((view?.getSearchBarText().rangeOfCharacter(from: set.inverted)) != nil)
+        
+        if ((view?.getSearchBarText() != "") && isAlphabet(searchBarText: view?.getSearchBarText() ?? "" ) ){
         interactor?.fetchRecipeData(completionHandler: { (value) in
             print((value as? SearchModel)?._links.next.href)
             if let response = value as? SearchModel{
@@ -30,6 +32,20 @@ class SearchPresenter {
         }, searchKeyword: (view?.getSearchBarText())!)
     
         
+        }
+    }
+    func isAlphabet(searchBarText : String) -> Bool {
+        do {
+            let regex = try NSRegularExpression(pattern: ".*[^A-Za-z ].*", options: [])
+            if regex.firstMatch(in: searchBarText, options: [], range: NSMakeRange(0, searchBarText.count)) != nil {
+                 return false
+
+            } else {
+                return true
+            }
+        }
+        catch {
+            return false
         }
     }
 }

@@ -11,6 +11,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var resultTableView: UITableView!
     @IBOutlet weak var historyContainerView: UIView!
+    @IBOutlet weak var filterContainerView: UIView!
     
 
     var presenter : SearchOutput?
@@ -18,19 +19,35 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
     var interactor = SearchInteractor()
     var searchBarText: String?
 
-    private lazy var historyViewController: HistoryViewController = {
-    // Load Storyboard
-    let storyboard = UIStoryboard(name: "Search", bundle: Bundle.main)
+//    private lazy var historyViewController: HistoryViewController = {
+//    // Load Storyboard
+//    let storyboard = UIStoryboard(name: "History", bundle: Bundle.main)
+//
+//    // Instantiate View Controller
+//    var viewController = storyboard.instantiateViewController(withIdentifier: "HistoryViewController") as! HistoryViewController
+//
+//    // Add View Controller as Child View Controller
+//        self.addViewControllerAsChild(asChildViewController: viewController)
+//
+//    return viewController
+//    }()
+    
+    
+//    private lazy var filterViewController: FilterViewController = {
+//    // Load Storyboard
+//    let storyboard = UIStoryboard(name: "Filter", bundle: Bundle.main)
+//
+//    // Instantiate View Controller
+//    var viewController = storyboard.instantiateViewController(withIdentifier: "FilterViewController") as! FilterViewController
+//
+//    // Add View Controller as Child View Controller
+//        self.addViewControllerAsChild(asChildViewController: viewController)
+//
+//    return viewController
+//    }()
 
-    // Instantiate View Controller
-    var viewController = storyboard.instantiateViewController(withIdentifier: "HistoryViewController") as! HistoryViewController
-
-    // Add View Controller as Child View Controller
-        self.addViewControllerAsChild(asChildViewController: viewController)
-
-    return viewController
-    }()
-
+    
+    
     private func remove(asChildViewController viewController: UIViewController) {
     // Notify Child View Controller
         viewController.willMove(toParent: nil)
@@ -43,15 +60,19 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
     }
     func addViewControllerAsChild(asChildViewController: UIViewController) {
     asChildViewController.view.frame = historyContainerView.bounds
+    asChildViewController.view.frame = filterContainerView.bounds
+
     asChildViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-    historyContainerView.addSubview(asChildViewController.view)
+    filterContainerView.addSubview(asChildViewController.view)
         asChildViewController.viewDidLoad()
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initPresenter()
         presenter?.viewDidLoad()
-        historyAddContainer()
+//        historyAddContainer()
+//        filterAddContainer()
         // Do any additional setup after loading the view.
     }
     // MARK: -
@@ -91,9 +112,12 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
 
 
 extension SearchViewController : SearchInput{
-    func historyAddContainer(){
-        addViewControllerAsChild(asChildViewController: historyViewController)
-    }
+//    func historyAddContainer(){
+//        addViewControllerAsChild(asChildViewController: historyViewController)
+//    }
+//    func filterAddContainer(){
+//        addViewControllerAsChild(asChildViewController: filterViewController)
+//    }
     func setViewControllerDelegates() {
         searchBar.delegate = self
         resultTableView.delegate = self
@@ -106,12 +130,16 @@ extension SearchViewController : SearchInput{
 //        historyContainerView.isHidden = true
         presenter?.didTapSearchTextField()
         UserDefaults.setUserSearch(key: searchBarText ?? "Error" )
-
+        
+        
+        (children.first as? HistoryViewController)?.historyTableView.reloadData()
+        
+        
     }
 
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = true
-        historyContainerView.isHidden = false
+//        historyContainerView.isHidden = false
     }
 
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {

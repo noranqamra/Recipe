@@ -9,24 +9,21 @@ import UIKit
 
 class HistoryViewController: UIViewController , UITableViewDelegate, UITableViewDataSource{
     @IBOutlet weak var historyTableView: UITableView!
-    var history: [String] = []
+//    var history: [String] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         historyTableView.delegate = self
         historyTableView.dataSource = self
-        history = UserDefaults.getUserSearch()
-        historyTableView.reloadData()
-        print("$" ,history)
         // Do any additional setup after loading the view.
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return history.count
+        return UserDefaults.getUserSearch().count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell", for: indexPath)
-    cell.textLabel?.text = history[indexPath.row]
+        cell.textLabel?.text = UserDefaults.getUserSearch()[indexPath.row]
             return cell
         
         
@@ -62,9 +59,10 @@ extension UserDefaults {
         if !array.contains(key) {
             array.append(key)
         }
-        if array.count > 10 { array.removeFirst() }
+        if array.count > 10 {
+            array.removeFirst()
+        }
         UserDefaults.standard.set(array, forKey: "SEARCHED_DATA")
-        
     }
     static func getUserSearch() -> [String] {
         guard let array = UserDefaults.standard.object(forKey: "SEARCHED_DATA") as? [String] else { return [] }

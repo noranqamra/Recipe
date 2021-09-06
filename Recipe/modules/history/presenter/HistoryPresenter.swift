@@ -1,20 +1,17 @@
 //
-//  SearchPresenter.swift
+//  HistoryPresenter.swift
 //  Recipe
 //
-//  Created by Nouran Alaa on 23/08/2021.
+//  Created by Nouran Alaa on 05/09/2021.
 //
 
 import Foundation
-class SearchPresenter {
+class HistoryPresenter {
     
     
     weak var view : SearchInput?
     var router : SearchRouter?
     var interactor : SearchInteractor?
-    
-    let set = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ ")
-
     init(view : SearchInput , router : SearchRouter, interactor : SearchInteractor){
         self.view = view
         self.router = router
@@ -22,7 +19,7 @@ class SearchPresenter {
         self.interactor = interactor
     }
     private func fetchRecipeData(){
-        if ((view?.getSearchBarText() != "") && ((view?.getSearchBarText().rangeOfCharacter(from: set.inverted)) != nil)){
+        if view?.getSearchBarText() != "" {
         interactor?.fetchRecipeData(completionHandler: { (value) in
             print((value as? SearchModel)?._links.next.href)
             if let response = value as? SearchModel{
@@ -33,7 +30,7 @@ class SearchPresenter {
         }
     }
 }
-extension SearchPresenter : SearchOutput{
+extension HistoryPresenter : SearchOutput{
    
     func viewDidLoad() {
         

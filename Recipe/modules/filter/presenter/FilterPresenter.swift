@@ -6,13 +6,20 @@
 //
 
 import Foundation
-class FilterPresenter{
+class FilterPresenter {
     
+    weak var view : FilterInput?
+    init(view : FilterInput ){
+        self.view = view
+    }
+  
 }
-extension FilterPresenter {
+extension FilterPresenter : FilterOutput{
    
     func viewDidLoad() {
-        
-//        view?.setViewControllerDelegates()
+        view?.setViewControllerDelegates()
+        view?.register()
     }
+
+
 }

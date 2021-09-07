@@ -8,24 +8,39 @@
 import Foundation
 import UIKit
 
-class FilterViewController: UIViewController {
+class FilterViewController: UIViewController, UICollectionViewDelegate {
     
     @IBOutlet weak var filterCollectionView: UICollectionView!
-    
+    var presenter : FilterOutput?
     var lowSugar = "low sugar"
     var keto = "keto"
     var vegan = "vegan"
     
     
-//    override func viewDidLoad() {
-//    }
-//
-//}
-//extension FilterViewController{
-//    func collectionView(_ collectionView: UICollectionView,
-//      didSelectItemAt indexPath: IndexPath) -> Int {
-//        return indexPath.row + 1
-//      }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        initPresenter()
+        presenter?.viewDidLoad()
+    }
+
+private func initPresenter(){
+    presenter = FilterPresenter(view: self)
+}
+}
+extension FilterViewController : FilterInput{
+    func setViewControllerDelegates() {
+        filterCollectionView.delegate = self
+    }
+    
+    func register() {
+        let cellNib = UINib(nibName: "FilterCell", bundle: nil)
+        filterCollectionView.register(cellNib, forCellWithReuseIdentifier: "FilterCell")
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+      didSelectItemAt indexPath: IndexPath) -> Int {
+        return indexPath.row + 1
+      }
 //    func selectingFilter() {
 //        if  {
 //            
@@ -52,8 +67,6 @@ class FilterViewController: UIViewController {
 //    func veganSelected() {
 //
 //    }
-//    func setViewControllerDelegates() {
-//        filterCollectionView.delegate = self
-//    }
+
 
 }

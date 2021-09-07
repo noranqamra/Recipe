@@ -122,12 +122,12 @@ extension SearchViewController : SearchInput{
         searchBar.delegate = self
         resultTableView.delegate = self
         resultTableView.dataSource = self
-//        historyContainerView.isHidden = true
+        historyContainerView.isHidden = true
     }
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {     //presenter
         searchBarText = searchBar.text
         print("searchTexter \(searchBarText)")
-//        historyContainerView.isHidden = true
+        historyContainerView.isHidden = true
         presenter?.didTapSearchTextField()
         UserDefaults.setUserSearch(key: searchBarText ?? "Error" )
         
@@ -139,17 +139,17 @@ extension SearchViewController : SearchInput{
 
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = true
-//        historyContainerView.isHidden = false
+        historyContainerView.isHidden = false
     }
 
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-//        historyContainerView.isHidden = true
+        historyContainerView.isHidden = true
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {  //presenter
         searchBar.showsCancelButton = false
         self.view.endEditing(true)
-//        historyContainerView.isHidden = true
+        historyContainerView.isHidden = true
     }
     
     func initRecipeArray() {

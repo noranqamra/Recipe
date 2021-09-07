@@ -78,7 +78,8 @@ extension HistoryViewController : HistoryInput{
     }
     
     func register() {
-        
+        let cellNib = UINib(nibName: "HistoryCell", bundle: nil)
+        historyTableView.register(cellNib, forCellReuseIdentifier: "HistoryCell")
     }
     
     

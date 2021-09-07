@@ -55,7 +55,7 @@ extension SearchPresenter : SearchOutput{
         
         view?.initRecipeArray()
         view?.setViewControllerDelegates()
-        view?.cellNIBFile()
+        view?.register()
     }
     
     func didTapSearchTextField() {

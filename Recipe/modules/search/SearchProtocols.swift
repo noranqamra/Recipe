@@ -24,6 +24,6 @@ protocol SearchInput : class {
     func setViewControllerDelegates()
     func getSearchBarText () -> String
     func setSearchModel(searchModel : SearchModel)
-    func cellNIBFile()
+    func register()
     
 }

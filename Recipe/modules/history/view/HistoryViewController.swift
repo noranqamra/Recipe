@@ -9,12 +9,17 @@ import UIKit
 
 class HistoryViewController: UIViewController , UITableViewDelegate, UITableViewDataSource{
     @IBOutlet weak var historyTableView: UITableView!
-//    var history: [String] = []
+    
+    var presenter : HistoryOutput?
     override func viewDidLoad() {
         super.viewDidLoad()
-        historyTableView.delegate = self
-        historyTableView.dataSource = self
+        initPresenter()
+        presenter?.viewDidLoad()
+        
         // Do any additional setup after loading the view.
+    }
+    private func initPresenter(){
+        presenter = HistoryPresenter(view: self)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -22,19 +27,16 @@ class HistoryViewController: UIViewController , UITableViewDelegate, UITableView
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell", for: indexPath)
-        cell.textLabel?.text = UserDefaults.getUserSearch()[indexPath.row]
-            return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell", for: indexPath) as? HistoryCell
+        cell?.configure(indexPath: indexPath )
+        return cell ?? UITableViewCell()
         
         
         
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//            searchBar.text = history[indexPath.row]
-//            searchBarText = history[indexPath.row]
-//            historyTableView.isHidden = true
-//            presenter?.didTapSearchTextField()
+
 
     }
     
@@ -68,4 +70,16 @@ extension UserDefaults {
         guard let array = UserDefaults.standard.object(forKey: "SEARCHED_DATA") as? [String] else { return [] }
         return array
     }
+}
+extension HistoryViewController : HistoryInput{
+    func setViewControllerDelegates() {
+        historyTableView.delegate = self
+        historyTableView.dataSource = self
+    }
+    
+    func register() {
+        
+    }
+    
+    
 }

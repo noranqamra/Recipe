@@ -2,25 +2,32 @@
 //  FilterCell.swift
 //  Recipe
 //
-//  Created by Nouran Alaa on 07/09/2021.
+//  Created by Nouran Alaa on 08/09/2021.
 //
 
 import UIKit
 
-class FilterCell: UITableViewCell {
+class FilterCell: UICollectionViewCell {
 
+    @IBOutlet weak var filterNameLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
     func configure (indexPath : IndexPath) {
-            self.textLabel?.text = UserDefaults.getUserSearch()[indexPath.row]
+        
+        if(indexPath.row == 0 ) {
+            self.filterNameLabel.text = "All"
+            }
+        else if (indexPath.row == 1) {
+            self.filterNameLabel.text = "Low Sugar"
         }
-    
+        else if (indexPath.row == 2) {
+            self.filterNameLabel.text = "Keto"
+        }
+        else if (indexPath.row == 3) {
+            self.filterNameLabel.text = "Vegan"
+        }
+    }
 }
+

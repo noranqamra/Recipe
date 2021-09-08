@@ -8,10 +8,11 @@
 import Foundation
 import UIKit
 
-class FilterViewController: UIViewController, UICollectionViewDelegate {
+class FilterViewController: UIViewController, UICollectionViewDelegate , UICollectionViewDataSource {
     
     @IBOutlet weak var filterCollectionView: UICollectionView!
     var presenter : FilterOutput?
+    var all = "all"
     var lowSugar = "low sugar"
     var keto = "keto"
     var vegan = "vegan"
@@ -26,10 +27,23 @@ class FilterViewController: UIViewController, UICollectionViewDelegate {
 private func initPresenter(){
     presenter = FilterPresenter(view: self)
 }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FilterCell", for: indexPath) as? FilterCell
+        cell?.configure(indexPath: indexPath)
+        return cell ?? UICollectionViewCell()
+    }
+    
+    
+    
 }
 extension FilterViewController : FilterInput{
     func setViewControllerDelegates() {
         filterCollectionView.delegate = self
+        filterCollectionView.dataSource = self 
     }
     
     func register() {

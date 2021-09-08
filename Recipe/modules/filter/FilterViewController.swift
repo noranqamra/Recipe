@@ -37,13 +37,16 @@ private func initPresenter(){
         return cell ?? UICollectionViewCell()
     }
     
-    
+    func collectionView(_ collectionView: UICollectionView,
+      didSelectItemAt indexPath: IndexPath)  {
+        print("Cell \(indexPath.row + 1) clicked")
+      }
     
 }
 extension FilterViewController : FilterInput{
     func setViewControllerDelegates() {
         filterCollectionView.delegate = self
-        filterCollectionView.dataSource = self 
+        filterCollectionView.dataSource = self
     }
     
     func register() {
@@ -51,36 +54,21 @@ extension FilterViewController : FilterInput{
         filterCollectionView.register(cellNib, forCellWithReuseIdentifier: "FilterCell")
     }
     
-    func collectionView(_ collectionView: UICollectionView,
-      didSelectItemAt indexPath: IndexPath) -> Int {
-        return indexPath.row + 1
-      }
-//    func selectingFilter() {
-//        if  {
-//            
+//    func filterSelected(filterCollectionView : UICollectionView ) {
+//        if collectionView( filterCollectionView, numberOfItemsInSection: 4) == 0 {
+//        
 //        }
-//        else if  {
-//            
+//        else if collectionView( filterCollectionView, numberOfItemsInSection: 4) == 1 {
+//        
 //        }
-//        else if  {
-//            
+//        else if collectionView( filterCollectionView, numberOfItemsInSection: 4) == 2 {
+//        
 //        }
-//        else if  {
+//        else if collectionView( filterCollectionView, numberOfItemsInSection: 4) == 3 {
 //            
 //        }
 //    }
-//    func allSelected() {
-//
-//    }
-//    func lowSugarSelected() {
-//
-//    }
-//    func ketoSelected() {
-//
-//    }
-//    func veganSelected() {
-//
-//    }
-
-
 }
+
+
+

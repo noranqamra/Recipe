@@ -9,6 +9,7 @@ import Foundation
 struct SearchModel : Decodable {
     var _links : LinksData
     var hits : [HitsData]
+    var count : Int
 }
 struct LinksData : Decodable {
     var next : NextData

@@ -12,10 +12,6 @@ class FilterViewController: UIViewController, UICollectionViewDelegate , UIColle
     
     @IBOutlet weak var filterCollectionView: UICollectionView!
     var presenter : FilterOutput?
-    var all = "all"
-    var lowSugar = "low sugar"
-    var keto = "keto"
-    var vegan = "vegan"
     
     
     override func viewDidLoad() {
@@ -23,10 +19,10 @@ class FilterViewController: UIViewController, UICollectionViewDelegate , UIColle
         initPresenter()
         presenter?.viewDidLoad()
     }
-
-private func initPresenter(){
-    presenter = FilterPresenter(view: self)
-}
+    
+    private func initPresenter(){
+        presenter = FilterPresenter(view: self)
+    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 4
     }
@@ -38,9 +34,10 @@ private func initPresenter(){
     }
     
     func collectionView(_ collectionView: UICollectionView,
-      didSelectItemAt indexPath: IndexPath)  {
-        print("Cell \(indexPath.row + 1) clicked")
-      }
+                        didSelectItemAt indexPath: IndexPath)  {
+        (parent as? SearchViewController)?.currentFilter = indexPath.row
+//        print("Cell \(indexPath.row + 1) clicked")
+    }
     
 }
 extension FilterViewController : FilterInput{
@@ -54,20 +51,7 @@ extension FilterViewController : FilterInput{
         filterCollectionView.register(cellNib, forCellWithReuseIdentifier: "FilterCell")
     }
     
-//    func filterSelected(filterCollectionView : UICollectionView ) {
-//        if collectionView( filterCollectionView, numberOfItemsInSection: 4) == 0 {
-//        
-//        }
-//        else if collectionView( filterCollectionView, numberOfItemsInSection: 4) == 1 {
-//        
-//        }
-//        else if collectionView( filterCollectionView, numberOfItemsInSection: 4) == 2 {
-//        
-//        }
-//        else if collectionView( filterCollectionView, numberOfItemsInSection: 4) == 3 {
-//            
-//        }
-//    }
+    
 }
 
 

@@ -18,8 +18,12 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
     var searchModel : SearchModel?
     var interactor = SearchInteractor()
     var searchBarText: String?
-
-
+    var isRequestingNextPage : Bool = false
+    var currentFilter : Int = 0 {didSet{
+        presenter?.didReceiveCurrentFilter(currentFilter: currentFilter)
+        print(currentFilter)
+    }}
+    
     func addViewControllerAsChild(asChildViewController: UIViewController) {
     asChildViewController.view.frame = historyContainerView.bounds
     asChildViewController.view.frame = filterContainerView.bounds
@@ -59,6 +63,17 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
         
         
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if let currentCount = searchModel?.hits.count , isRequestingNextPage == false{
+            if indexPath.row == currentCount - 1 { // last cell
+                if searchModel?.count ?? 0  > currentCount { // more items to fetch
+                    presenter?.didRequestNextPage() // increment `fromIndex` by 20 before server call
+                    isRequestingNextPage = true
+                }
+            }
+        }
+    }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
@@ -73,6 +88,22 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
 
 
 extension SearchViewController : SearchInput{
+    func resetSearchModel() {
+        searchModel = nil
+    }
+    
+    func reloadTableView() {
+        resultTableView.reloadData()
+    }
+    
+    func resetIsRequestingNextPage() {
+        isRequestingNextPage = false
+    }
+    
+    func getSearchModel() -> SearchModel? {
+        return searchModel
+    }
+    
 
     func setViewControllerDelegates() {
         searchBar.delegate = self
@@ -132,7 +163,14 @@ extension SearchViewController : SearchInput{
         return searchBarText ?? ""
     }
     func setSearchModel(searchModel : SearchModel){
-        self.searchModel = searchModel
+        if let currentRecords = self.searchModel?.hits{
+            self.searchModel?.hits = currentRecords + searchModel.hits
+            self.searchModel?.count = searchModel.count
+            self.searchModel?._links = searchModel._links
+        }
+        else{
+            self.searchModel = searchModel
+        }
         resultTableView.reloadData()
         self.view.endEditing(true)
     }

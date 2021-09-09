@@ -8,10 +8,9 @@
 import Foundation
 class SearchInteractor {
     var network = NetworkManager()
-    func fetchRecipeData (completionHandler : @escaping (Any)-> Void, searchKeyword: String){
+    func fetchRecipeData (completionHandler : @escaping (Any)-> Void, searchKeyword: String , nextPageurl : String? , healthLabel : String? ){
         print(searchKeyword)
-//        UserDefaults.setUserSearch(key: searchKeyword)
-        network.fetchData(searchText : searchKeyword, completionHandler: completionHandler)
+        network.fetchData(healthLabel: healthLabel, searchText : searchKeyword, nextPageurl: nextPageurl , completionHandler: completionHandler)
     }
     
     

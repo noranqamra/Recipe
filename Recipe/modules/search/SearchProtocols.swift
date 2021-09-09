@@ -6,15 +6,13 @@
 //
 
 import Foundation
-// da be represent el presenter w 7atta feeh 7agat leha 3laqa bel lofecycle w user interactions
+
 protocol SearchOutput {
     func viewDidLoad()
-    
     func didTapSearchTextField()
-    
-
+    func didRequestNextPage()
+    func didReceiveCurrentFilter(currentFilter : Int)
 }
-// da be represent el view
 protocol SearchInput : class {
     func showAvailableSuggestions()
     func showRecipe()
@@ -24,6 +22,10 @@ protocol SearchInput : class {
     func setViewControllerDelegates()
     func getSearchBarText () -> String
     func setSearchModel(searchModel : SearchModel)
+    func getSearchModel() -> SearchModel?
     func register()
+    func resetIsRequestingNextPage()
+    func resetSearchModel()
+    func reloadTableView()
     
 }

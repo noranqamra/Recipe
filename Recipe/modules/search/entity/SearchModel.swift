@@ -25,4 +25,7 @@ struct RecipeData : Decodable{
     var image : String
     var source : String
     var healthLabels : [String]
+    var ingredientLines : [String]
+    var url : String
+    var shareAs : String
 }

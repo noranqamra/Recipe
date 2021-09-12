@@ -13,7 +13,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
     @IBOutlet weak var historyContainerView: UIView!
     @IBOutlet weak var filterContainerView: UIView!
     
-
+    
     var presenter : SearchOutput?
     var searchModel : SearchModel?
     var interactor = SearchInteractor()
@@ -25,11 +25,11 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
     }}
     
     func addViewControllerAsChild(asChildViewController: UIViewController) {
-    asChildViewController.view.frame = historyContainerView.bounds
-    asChildViewController.view.frame = filterContainerView.bounds
-
-    asChildViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-    filterContainerView.addSubview(asChildViewController.view)
+        asChildViewController.view.frame = historyContainerView.bounds
+        asChildViewController.view.frame = filterContainerView.bounds
+        
+        asChildViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        filterContainerView.addSubview(asChildViewController.view)
         asChildViewController.viewDidLoad()
     }
     
@@ -37,29 +37,34 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
         super.viewDidLoad()
         initPresenter()
         presenter?.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
     // MARK: -
     private func initPresenter(){
         presenter = SearchPresenter(view: self, router : SearchRouter(), interactor: SearchInteractor())
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-            return searchModel?.hits.count ?? 0
+        
+        return searchModel?.hits.count ?? 0
         
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-            let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath ) as! SearchTableViewCell
-            cell.searchNameLabel.text = searchModel?.hits[indexPath.row].recipe.label
-            let url = URL(string: searchModel?.hits[indexPath.row].recipe.image ??  "")
-            cell.searchImage.kf.setImage(with: url,options: [.cacheOriginalImage])
-            cell.searchSourceLabel.text = searchModel?.hits[indexPath.row].recipe.source
-            cell.searchHealthLabel.text = searchModel?.hits[indexPath.row].recipe.healthLabels.joined(separator: " - ")
-            return cell
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath ) as! SearchTableViewCell
+        //        if searchModel?.hits == nil{
+        //            print("no search result")
+        //        }
+        //        else {
+        cell.searchNameLabel.text = searchModel?.hits[indexPath.row].recipe.label
+        let url = URL(string: searchModel?.hits[indexPath.row].recipe.image ??  "")
+        cell.searchImage.kf.setImage(with: url,options: [.cacheOriginalImage])
+        cell.searchSourceLabel.text = searchModel?.hits[indexPath.row].recipe.source
+        cell.searchHealthLabel.text = searchModel?.hits[indexPath.row].recipe.healthLabels.joined(separator: " - ")
+        //        }
+        return cell
         
         
     }
@@ -74,16 +79,22 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
             }
         }
     }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-    }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("recipe is selected")
+        
+        let detailsStoryBoard = UIStoryboard(name: "Details", bundle: nil)
+        if let detailsViewController = detailsStoryBoard.instantiateViewController(withIdentifier: "DetailsViewController") as? DetailsViewController{
+            let recipeData = searchModel?.hits[indexPath.row].recipe
+            detailsViewController.recipeData = recipeData
+            navigationController?.pushViewController(detailsViewController, animated: true)
+        }
+    }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
-
-
+    
+    
 }
 
 
@@ -104,7 +115,7 @@ extension SearchViewController : SearchInput{
         return searchModel
     }
     
-
+    
     func setViewControllerDelegates() {
         searchBar.delegate = self
         resultTableView.delegate = self
@@ -123,16 +134,16 @@ extension SearchViewController : SearchInput{
         
         
     }
-
+    
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = true
         historyContainerView.isHidden = false
     }
-
+    
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         historyContainerView.isHidden = true
     }
-
+    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {  //presenter
         searchBar.showsCancelButton = false
         self.view.endEditing(true)
@@ -140,24 +151,24 @@ extension SearchViewController : SearchInput{
     }
     
     func initRecipeArray() {
-    
+        
     }
     
     func showRecipe() {
-
+        
     }
-
+    
     func showError() {
-
+        
     }
-
+    
     func updateView() {
-
+        
     }
-
-
+    
+    
     func showAvailableSuggestions() {
-
+        
     }
     func getSearchBarText () -> String{
         return searchBarText ?? ""
@@ -178,9 +189,9 @@ extension SearchViewController : SearchInput{
         let cellNib = UINib(nibName: "SearchTableViewCell", bundle: nil)
         resultTableView.register(cellNib, forCellReuseIdentifier: "SearchTableViewCell")
     }
-
+    
 }
 
 
- 
+
 

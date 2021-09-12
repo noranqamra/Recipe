@@ -10,11 +10,8 @@ import UIKit
 class SearchTableViewCell: UITableViewCell {
 
 
-//    @IBOutlet weak var searchNaameLabel: UILabel!
-//    @IBOutlet weak var searchSourceLabel: UILabel!
-//    @IBOutlet weak var searchHealthLabel: UILabel!
-//    @IBOutlet weak var searchImage: UIImageView!
-        @IBOutlet weak var searchNameLabel: UILabel!
+
+    @IBOutlet weak var searchNameLabel: UILabel!
     @IBOutlet weak var searchSourceLabel: UILabel!
     @IBOutlet weak var searchHealthLabel: UILabel!
     @IBOutlet weak var searchImage: UIImageView!

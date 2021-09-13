@@ -8,13 +8,18 @@
 import Foundation
 import UIKit
 import Kingfisher
+import SafariServices
+
 class DetailsViewController : UIViewController  {
     
     @IBOutlet weak var recipeImage: UIImageView!
     @IBOutlet weak var recipeTitle: UILabel!
     @IBOutlet weak var ingredientLines: UILabel!
     @IBAction func recipeWebsite(_ sender: Any) {
-    
+        
+            guard let recipeURL = URL(string: recipeData?.url ?? "") else { return }
+            let svc = SFSafariViewController(url: recipeURL)
+            present(svc, animated: true, completion: nil)
     }
     
     

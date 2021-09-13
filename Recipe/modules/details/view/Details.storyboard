@@ -49,10 +49,18 @@
                                     <action selector="recipeWebsite:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="nnV-Qf-G1m"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R1q-Kd-Dv7">
+                                <rect key="frame" x="322" y="48" width="73" height="22"/>
+                                <state key="normal" title="Button" image="square.and.arrow.up" catalog="system"/>
+                                <connections>
+                                    <action selector="shareAs:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="eET-Ym-4Wy"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="R1q-Kd-Dv7" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="4" id="BNJ-Zs-44m"/>
                             <constraint firstItem="ngW-7G-r7p" firstAttribute="centerX" secondItem="Viy-s3-EcV" secondAttribute="centerX" id="Bfl-I4-bZs"/>
                             <constraint firstItem="Viy-s3-EcV" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="DFG-7a-LlH"/>
                             <constraint firstItem="Viy-s3-EcV" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="87" id="FHH-Bm-Haa"/>
@@ -64,6 +72,7 @@
                             <constraint firstItem="xai-iN-zhA" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="aKN-rY-PdI"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="xai-iN-zhA" secondAttribute="trailing" constant="20" id="bfu-ot-ved"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Viy-s3-EcV" secondAttribute="trailing" constant="87" id="jiN-28-KFm"/>
+                            <constraint firstItem="R1q-Kd-Dv7" firstAttribute="leading" secondItem="Viy-s3-EcV" secondAttribute="trailing" constant="-5" id="uC0-RH-TDB"/>
                             <constraint firstItem="ngW-7G-r7p" firstAttribute="top" secondItem="Viy-s3-EcV" secondAttribute="bottom" constant="20" id="vR1-OH-ZT9"/>
                             <constraint firstItem="xai-iN-zhA" firstAttribute="centerX" secondItem="ngW-7G-r7p" secondAttribute="centerX" id="xNz-6c-MgU"/>
                         </constraints>
@@ -80,6 +89,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

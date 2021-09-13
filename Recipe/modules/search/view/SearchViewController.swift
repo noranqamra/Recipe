@@ -53,20 +53,14 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath ) as! SearchTableViewCell
-        //        if searchModel?.hits == nil{
-        //            print("no search result")
-        //        }
-        //        else {
-        cell.searchNameLabel.text = searchModel?.hits[indexPath.row].recipe.label
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath ) as? SearchTableViewCell
+
+        cell?.searchNameLabel.text = searchModel?.hits[indexPath.row].recipe.label
         let url = URL(string: searchModel?.hits[indexPath.row].recipe.image ??  "")
-        cell.searchImage.kf.setImage(with: url,options: [.cacheOriginalImage])
-        cell.searchSourceLabel.text = searchModel?.hits[indexPath.row].recipe.source
-        cell.searchHealthLabel.text = searchModel?.hits[indexPath.row].recipe.healthLabels.joined(separator: " - ")
-        //        }
-        return cell
-        
-        
+        cell?.searchImage.kf.setImage(with: url,options: [.cacheOriginalImage])
+        cell?.searchSourceLabel.text = searchModel?.hits[indexPath.row].recipe.source
+        cell?.searchHealthLabel.text = searchModel?.hits[indexPath.row].recipe.healthLabels.joined(separator: " - ")
+        return cell ?? SearchTableViewCell()
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

@@ -22,6 +22,26 @@ class DetailsViewController : UIViewController  {
             present(svc, animated: true, completion: nil)
     }
     
+    @IBAction func shareAs(_ sender: Any) {
+        
+            guard let recipeURL = URL(string: recipeData?.url ?? "") else { return }
+            let activityViewController : UIActivityViewController = UIActivityViewController(
+                activityItems: [recipeURL], applicationActivities: nil)
+
+            // Anything you want to exclude
+            activityViewController.excludedActivityTypes = [
+                UIActivity.ActivityType.postToWeibo,
+                UIActivity.ActivityType.print,
+                UIActivity.ActivityType.assignToContact,
+                UIActivity.ActivityType.saveToCameraRoll,
+                UIActivity.ActivityType.addToReadingList,
+                UIActivity.ActivityType.postToFlickr,
+                UIActivity.ActivityType.postToVimeo,
+                UIActivity.ActivityType.postToTencentWeibo
+            ]
+
+        self.present(activityViewController, animated: true, completion: nil)
+    }
     
     var presenter : DetailsOutput?
     var recipeData : RecipeData?

@@ -31,9 +31,8 @@ class SearchPresenter {
                 }
                 self.view?.resetIsRequestingNextPage()
             }, searchKeyword: (view?.getSearchBarText())!, nextPageurl: nextPageurl, healthLabel: healthLabel )
-            
-            
         }
+       
     }
     func isAlphabet(searchBarText : String) -> Bool {
         do {

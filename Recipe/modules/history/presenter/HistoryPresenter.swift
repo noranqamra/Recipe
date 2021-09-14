@@ -12,6 +12,7 @@ class HistoryPresenter {
     init(view : HistoryInput ){
         self.view = view
     }
+    
   
 }
 extension HistoryPresenter : HistoryOutput{
@@ -20,6 +21,7 @@ extension HistoryPresenter : HistoryOutput{
         view?.setViewControllerDelegates()
         view?.register()
     }
-
-
+    func didSelectRowWith(text : String){
+        view?.fillSearchBarWithText(text : text)
+    }
 }

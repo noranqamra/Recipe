@@ -23,7 +23,7 @@ class SearchPresenter {
     }
     private func fetchRecipeData(nextPageurl : String? , healthLabel : String? ){
         
-        if ((view?.getSearchBarText() != "") && isAlphabet(searchBarText: view?.getSearchBarText() ?? "" ) ){
+        if ((view?.getSearchBarText() != "") && (view?.getSearchBarText() ?? "").isAlphabet() ){
             interactor?.fetchRecipeData(completionHandler: { (value) in
                 print((value as? SearchModel)?._links.next.href)
                 if let response = value as? SearchModel{
@@ -50,20 +50,11 @@ class SearchPresenter {
             view?.hideResultTable()
         }
     }
-    func isAlphabet(searchBarText : String) -> Bool {
-        do {
-            let regex = try NSRegularExpression(pattern: ".*[^A-Za-z ].*", options: [])
-            if regex.firstMatch(in: searchBarText, options: [], range: NSMakeRange(0, searchBarText.count)) != nil {
-                return false
-                
-            } else {
-                return true
-            }
-        }
-        catch {
-            return false
-        }
+    
+    func didSelectRowWith(recipeData : RecipeData){
+        router?.showDetails(recipeData : recipeData)
     }
+
 }
 extension SearchPresenter : SearchOutput{
     func didReceiveCurrentFilter(currentFilter: Int) {

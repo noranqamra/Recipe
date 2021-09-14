@@ -55,7 +55,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath ) as? SearchTableViewCell
-
+        
         cell?.searchNameLabel.text = searchModel?.hits[indexPath.row].recipe.label
         let url = URL(string: searchModel?.hits[indexPath.row].recipe.image ??  "")
         cell?.searchImage.kf.setImage(with: url,options: [.cacheOriginalImage])
@@ -77,14 +77,11 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("recipe is selected")
-        
-        let detailsStoryBoard = UIStoryboard(name: "Details", bundle: nil)
-        if let detailsViewController = detailsStoryBoard.instantiateViewController(withIdentifier: "DetailsViewController") as? DetailsViewController{
-            let recipeData = searchModel?.hits[indexPath.row].recipe
-            detailsViewController.recipeData = recipeData
-            navigationController?.pushViewController(detailsViewController, animated: true)
+        if let searchData = searchModel?.hits[indexPath.row].recipe{
+            presenter?.didSelectRowWith(recipeData: searchData)
         }
     }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
@@ -106,7 +103,7 @@ extension SearchViewController : SearchInput{
     
     func hideResultTable() {
         resultTableView.isHidden = true
-
+        
     }
     
     func resetSearchModel() {

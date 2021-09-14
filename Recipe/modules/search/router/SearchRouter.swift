@@ -6,6 +6,15 @@
 //
 
 import Foundation
+import UIKit
 class SearchRouter {
-  
+    func showDetails(recipeData : RecipeData){
+        let detailsStoryBoard = UIStoryboard(name: "Details", bundle: nil)
+        if let detailsViewController = detailsStoryBoard.instantiateViewController(withIdentifier: "DetailsViewController") as? DetailsViewController{
+            detailsViewController.recipeData = recipeData
+            if let navigationController = UIApplication.topViewController()?.navigationController{
+                navigationController.pushViewController(detailsViewController, animated: true)
+            }
+        }
+    }
 }

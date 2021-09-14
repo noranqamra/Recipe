@@ -12,6 +12,7 @@ protocol SearchOutput {
     func didTapSearchTextField()
     func didRequestNextPage()
     func didReceiveCurrentFilter(currentFilter : Int)
+    func didSelectRowWith(recipeData : RecipeData)
 }
 protocol SearchInput : class {
     func showAvailableSuggestions()

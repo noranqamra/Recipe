@@ -36,7 +36,7 @@ class HistoryViewController: UIViewController , UITableViewDelegate, UITableView
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        presenter?.didSelectRowWith(text : UserDefaults.getUserSearch()[indexPath.row])
 
     }
     
@@ -72,6 +72,8 @@ extension UserDefaults {
     }
 }
 extension HistoryViewController : HistoryInput{
+
+    
     func setViewControllerDelegates() {
         historyTableView.delegate = self
         historyTableView.dataSource = self
@@ -82,5 +84,8 @@ extension HistoryViewController : HistoryInput{
         historyTableView.register(cellNib, forCellReuseIdentifier: "HistoryCell")
     }
     
-    
+    func fillSearchBarWithText(text : String){
+        (parent as? SearchViewController)?.searchBar.text = text
+    }
+
 }

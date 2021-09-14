@@ -10,7 +10,7 @@ import UIKit
 class HistoryViewController: UIViewController , UITableViewDelegate, UITableViewDataSource{
     @IBOutlet weak var historyTableView: UITableView!
     
-    var presenter : HistoryOutput?
+    private var presenter : HistoryOutput?
     override func viewDidLoad() {
         super.viewDidLoad()
         initPresenter()
@@ -27,7 +27,7 @@ class HistoryViewController: UIViewController , UITableViewDelegate, UITableView
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell", for: indexPath) as? HistoryCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.HISTORY.rawValue, for: indexPath) as? HistoryCell
         cell?.configure(indexPath: indexPath )
         return cell ?? UITableViewCell()
         
@@ -41,7 +41,7 @@ class HistoryViewController: UIViewController , UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return CGFloat(GenericNumbers.ROW_HEIGHT.rawValue)
     }
 
     /*
@@ -55,22 +55,7 @@ class HistoryViewController: UIViewController , UITableViewDelegate, UITableView
     */
 
 }
-extension UserDefaults {
-   static func setUserSearch(key: String) {
-        var array = getUserSearch()
-        if !array.contains(key) {
-            array.append(key)
-        }
-        if array.count > 10 {
-            array.removeFirst()
-        }
-        UserDefaults.standard.set(array, forKey: "SEARCHED_DATA")
-    }
-    static func getUserSearch() -> [String] {
-        guard let array = UserDefaults.standard.object(forKey: "SEARCHED_DATA") as? [String] else { return [] }
-        return array
-    }
-}
+
 extension HistoryViewController : HistoryInput{
 
     
@@ -80,8 +65,8 @@ extension HistoryViewController : HistoryInput{
     }
     
     func register() {
-        let cellNib = UINib(nibName: "HistoryCell", bundle: nil)
-        historyTableView.register(cellNib, forCellReuseIdentifier: "HistoryCell")
+        let cellNib = UINib(nibName: CellIdentifier.HISTORY.rawValue, bundle: nil)
+        historyTableView.register(cellNib, forCellReuseIdentifier: CellIdentifier.HISTORY.rawValue)
     }
     
     func fillSearchBarWithText(text : String){

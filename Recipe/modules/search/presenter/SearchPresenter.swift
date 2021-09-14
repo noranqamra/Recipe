@@ -9,11 +9,11 @@ import Foundation
 class SearchPresenter {
     
     
-    weak var view : SearchInput?
-    var router : SearchRouter?
-    var interactor : SearchInteractor?
+    private weak var view : SearchInput?
+    private var router : SearchRouter?
+    private var interactor : SearchInteractor?
     
-    let set = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ \n")
+    let set = CharacterSet(charactersIn: SearchStrings.CHARACTERS.rawValue)
     
     init(view : SearchInput , router : SearchRouter, interactor : SearchInteractor){
         self.view = view
@@ -23,21 +23,25 @@ class SearchPresenter {
     }
     private func fetchRecipeData(nextPageurl : String? , healthLabel : String? ){
         
-        if ((view?.getSearchBarText() != "") && (view?.getSearchBarText() ?? "").isAlphabet() ){
+        if ((view?.getSearchBarText() != GenericString.EMPTY.rawValue) && (view?.getSearchBarText() ?? GenericString.EMPTY.rawValue).isAlphabet() ){
             interactor?.fetchRecipeData(completionHandler: { (value) in
-                print((value as? SearchModel)?._links.next.href)
-                if let response = value as? SearchModel{
-                    self.view?.setSearchModel(searchModel: response)
-                    self.controlResultPreview (response : response)
-                }
-                else if let response = value as? Int , response == 0{
-                    self.controlResultPreview (response: nil)
-                }
+                self.handleFetchRecipeData(value: value)
                 self.view?.resetIsRequestingNextPage()
-            }, searchKeyword: (view?.getSearchBarText())!, nextPageurl: nextPageurl, healthLabel: healthLabel )
+            }, searchKeyword: (view?.getSearchBarText()) ?? GenericString.EMPTY.rawValue , nextPageurl: nextPageurl, healthLabel: healthLabel )
             
         }
        
+    }
+    private func handleFetchRecipeData (value : Any){
+        if let response = value as? SearchModel{
+            self.view?.setSearchModel(searchModel: response)
+            self.view?.reloadTableView ()
+            self.view?.setViewEndEditing()
+            self.controlResultPreview (response : response)
+        }
+        else if let response = value as? Int , response == GenericNumbers.DEFAULT_INT_VALUE.rawValue{
+            self.controlResultPreview (response: nil)
+        }
     }
     private func controlResultPreview (response : SearchModel?){
         if response?.hits.count ?? 0 > 0{
@@ -65,13 +69,13 @@ extension SearchPresenter : SearchOutput{
             healthLabelAPIKey = nil
         }
         else if currentFilter == 1{
-            healthLabelAPIKey = "low-sugar"
+            healthLabelAPIKey = FilterAPIKey.LOW_SUGAR.rawValue
         }
         else if currentFilter == 2{
-            healthLabelAPIKey = "keto-friendly"
+            healthLabelAPIKey = FilterAPIKey.KETO.rawValue
         }
         else if currentFilter == 3{
-            healthLabelAPIKey = "vegan"
+            healthLabelAPIKey = FilterAPIKey.VEGAN.rawValue
         }
         fetchRecipeData(nextPageurl: nil, healthLabel: healthLabelAPIKey)
     }
@@ -90,6 +94,7 @@ extension SearchPresenter : SearchOutput{
     func didRequestNextPage(){
         if let nextPageurl = view?.getSearchModel()?._links.next.href{
             fetchRecipeData(nextPageurl: nextPageurl, healthLabel: nil )
+            view?.setIsRequestingNextPage()
         }
     }
     

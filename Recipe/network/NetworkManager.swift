@@ -22,8 +22,7 @@ class NetworkManager {
         AF.request(url).validate().responseDecodable(of: SearchModel.self) { (response) in
             if let value = response.value{
                 completionHandler(value)
-                print(response.value?._links.next.href)
-                print(response.value?.hits[0].recipe.label)
+                
                 
             }
             else{

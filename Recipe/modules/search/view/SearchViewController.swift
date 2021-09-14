@@ -15,24 +15,14 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
     @IBOutlet weak var noSearchResult: UILabel!
     
     
-    var presenter : SearchOutput?
-    var searchModel : SearchModel?
-    var interactor = SearchInteractor()
-    var searchBarText: String?
-    var isRequestingNextPage : Bool = false
-    var currentFilter : Int = 0 {didSet{
+    private var presenter : SearchOutput?
+    private var searchModel : SearchModel?
+    private var interactor = SearchInteractor()
+    private var searchBarText: String?
+    private var isRequestingNextPage : Bool = false
+    var currentFilter : Int = GenericNumbers.DEFAULT_INT_VALUE.rawValue {didSet{
         presenter?.didReceiveCurrentFilter(currentFilter: currentFilter)
-        print(currentFilter)
     }}
-    
-    func addViewControllerAsChild(asChildViewController: UIViewController) {
-        asChildViewController.view.frame = historyContainerView.bounds
-        asChildViewController.view.frame = filterContainerView.bounds
-        
-        asChildViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        filterContainerView.addSubview(asChildViewController.view)
-        asChildViewController.viewDidLoad()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,42 +38,32 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return searchModel?.hits.count ?? 0
+        return searchModel?.hits.count ?? GenericNumbers.DEFAULT_INT_VALUE.rawValue
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath ) as? SearchTableViewCell
-        
-        cell?.searchNameLabel.text = searchModel?.hits[indexPath.row].recipe.label
-        let url = URL(string: searchModel?.hits[indexPath.row].recipe.image ??  "")
-        cell?.searchImage.kf.setImage(with: url,options: [.cacheOriginalImage])
-        cell?.searchSourceLabel.text = searchModel?.hits[indexPath.row].recipe.source
-        cell?.searchHealthLabel.text = searchModel?.hits[indexPath.row].recipe.healthLabels.joined(separator: " - ")
-        return cell ?? SearchTableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.SEARCH.rawValue, for: indexPath ) as? SearchTableViewCell
+        guard let recipeData = searchModel?.hits[indexPath.row].recipe else {return UITableViewCell()}
+        cell?.configure(recipeData: recipeData)
+        return cell ?? UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if let currentCount = searchModel?.hits.count , isRequestingNextPage == false{
-            if indexPath.row == currentCount - 1 { // last cell
-                if searchModel?.count ?? 0  > currentCount { // more items to fetch
-                    presenter?.didRequestNextPage() // increment `fromIndex` by 20 before server call
-                    isRequestingNextPage = true
-                }
-            }
+        if let currentCount = searchModel?.hits.count , isRequestingNextPage == false , indexPath.row == currentCount - GenericNumbers.DECREMENTER.rawValue , searchModel?.count ?? GenericNumbers.DEFAULT_INT_VALUE.rawValue  > currentCount{
+            presenter?.didRequestNextPage()
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("recipe is selected")
         if let searchData = searchModel?.hits[indexPath.row].recipe{
             presenter?.didSelectRowWith(recipeData: searchData)
         }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return CGFloat(GenericNumbers.ROW_HEIGHT.rawValue)
     }
 }
 
@@ -129,12 +109,11 @@ extension SearchViewController : SearchInput{
         resultTableView.dataSource = self
         historyContainerView.isHidden = true
     }
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {     //presenter
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {   
         searchBarText = searchBar.text
-        print("searchTexter \(searchBarText)")
         historyContainerView.isHidden = true
         presenter?.didTapSearchTextField()
-        UserDefaults.setUserSearch(key: searchBarText ?? "Error" )
+        UserDefaults.setUserSearch(key: searchBarText ?? SearchStrings.ERROR.rawValue )
         
         
         (children.first as? HistoryViewController)?.historyTableView.reloadData()
@@ -178,7 +157,7 @@ extension SearchViewController : SearchInput{
         
     }
     func getSearchBarText () -> String{
-        return searchBarText ?? ""
+        return searchBarText ?? GenericString.EMPTY.rawValue
     }
     func setSearchModel(searchModel : SearchModel){
         if let currentRecords = self.searchModel?.hits{
@@ -189,12 +168,18 @@ extension SearchViewController : SearchInput{
         else{
             self.searchModel = searchModel
         }
-        resultTableView.reloadData()
+    }
+
+    func setViewEndEditing (){
         self.view.endEditing(true)
+
+    }
+    func setIsRequestingNextPage(){
+        isRequestingNextPage = true
     }
     func register (){
-        let cellNib = UINib(nibName: "SearchTableViewCell", bundle: nil)
-        resultTableView.register(cellNib, forCellReuseIdentifier: "SearchTableViewCell")
+        let cellNib = UINib(nibName: CellIdentifier.SEARCH.rawValue, bundle: nil)
+        resultTableView.register(cellNib, forCellReuseIdentifier: CellIdentifier.SEARCH.rawValue)
     }
     
 }

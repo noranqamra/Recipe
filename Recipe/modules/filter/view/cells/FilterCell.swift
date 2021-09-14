@@ -17,16 +17,16 @@ class FilterCell: UICollectionViewCell {
     func configure (indexPath : IndexPath) {
         
         if(indexPath.row == 0 ) {
-            self.filterNameLabel.text = "All"
+            self.filterNameLabel.text = FilterCellName.ALL.rawValue
             }
         else if (indexPath.row == 1) {
-            self.filterNameLabel.text = "Low Sugar"
+            self.filterNameLabel.text = FilterCellName.LOW_SUGAR.rawValue
         }
         else if (indexPath.row == 2) {
-            self.filterNameLabel.text = "Keto"
+            self.filterNameLabel.text = FilterCellName.KETO.rawValue
         }
         else if (indexPath.row == 3) {
-            self.filterNameLabel.text = "Vegan"
+            self.filterNameLabel.text = FilterCellName.VEGAN.rawValue
         }
     }
 }

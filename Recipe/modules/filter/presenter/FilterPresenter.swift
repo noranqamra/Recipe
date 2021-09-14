@@ -8,7 +8,7 @@
 import Foundation
 class FilterPresenter {
     
-    weak var view : FilterInput?
+    private weak var view : FilterInput?
     init(view : FilterInput ){
         self.view = view
     }

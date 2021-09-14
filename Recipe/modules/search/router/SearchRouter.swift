@@ -9,12 +9,11 @@ import Foundation
 import UIKit
 class SearchRouter {
     func showDetails(recipeData : RecipeData){
-        let detailsStoryBoard = UIStoryboard(name: "Details", bundle: nil)
-        if let detailsViewController = detailsStoryBoard.instantiateViewController(withIdentifier: "DetailsViewController") as? DetailsViewController{
-            detailsViewController.recipeData = recipeData
-            if let navigationController = UIApplication.topViewController()?.navigationController{
-                navigationController.pushViewController(detailsViewController, animated: true)
-            }
-        }
+        let detailsStoryBoard = UIStoryboard(name: StoryBoardName.DETAILS.rawValue, bundle: nil)
+        guard let detailsViewController = detailsStoryBoard.instantiateViewController(withIdentifier: ViewControllerIdentifier.DETAILS.rawValue) as? DetailsViewController else {return}
+        detailsViewController.recipeData = recipeData
+        guard let navigationController = UIApplication.topViewController()?.navigationController else{return}
+        navigationController.pushViewController(detailsViewController, animated: true)
+                
     }
 }

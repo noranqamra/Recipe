@@ -17,14 +17,43 @@ class DetailsViewController : UIViewController  {
     @IBOutlet weak var ingredientLines: UILabel!
     @IBAction func recipeWebsite(_ sender: Any) {
         
-            guard let recipeURL = URL(string: recipeData?.url ?? "") else { return }
+        guard let recipeURL = URL(string: recipeData?.url ?? GenericString.NEW_LINE.rawValue) else { return }
             let svc = SFSafariViewController(url: recipeURL)
             present(svc, animated: true, completion: nil)
     }
     
     @IBAction func shareAs(_ sender: Any) {
         
-            guard let recipeURL = URL(string: recipeData?.url ?? "") else { return }
+        presenter?.didTapShare()
+    }
+    
+    private var presenter : DetailsOutput?
+    var recipeData : RecipeData?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        initPresenter()
+        presenter?.viewDidLoad()
+        
+        // Do any additional setup after loading the view.
+    }
+    private func initPresenter(){
+        presenter = DetailsPresenter(view: self)
+    }
+
+}
+extension DetailsViewController : DetailsInput{
+    func getSearchModel() -> SearchModel? {
+        return nil
+    }
+    func fillRecipeData(){
+        recipeTitle.text = recipeData?.label
+        let url = URL(string: recipeData?.image ??  GenericString.EMPTY.rawValue)
+        recipeImage.kf.setImage(with: url,options: [.cacheOriginalImage])
+        ingredientLines.text = recipeData?.ingredientLines.joined(separator: GenericString.NEW_LINE.rawValue)
+    }
+    func showShareOptions (){
+        guard let recipeURL = URL(string: recipeData?.url ?? GenericString.NEW_LINE.rawValue) else { return }
             let activityViewController : UIActivityViewController = UIActivityViewController(
                 activityItems: [recipeURL], applicationActivities: nil)
 
@@ -41,33 +70,5 @@ class DetailsViewController : UIViewController  {
             ]
 
         self.present(activityViewController, animated: true, completion: nil)
-    }
-    
-    var presenter : DetailsOutput?
-    var recipeData : RecipeData?
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        initPresenter()
-        presenter?.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
-    }
-    private func initPresenter(){
-        presenter = DetailsPresenter(view: self)
-    }
-    
-    
-  
-}
-extension DetailsViewController : DetailsInput{
-    func getSearchModel() -> SearchModel? {
-        return nil
-    }
-    func fillRecipeData(){
-        recipeTitle.text = recipeData?.label
-        let url = URL(string: recipeData?.image ??  "")
-        recipeImage.kf.setImage(with: url,options: [.cacheOriginalImage])
-        ingredientLines.text = recipeData?.ingredientLines.joined(separator: "\n")
     }
 }

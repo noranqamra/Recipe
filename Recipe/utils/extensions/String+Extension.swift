@@ -14,7 +14,8 @@ extension String {
             if regex.firstMatch(in: self, options: [], range: NSMakeRange(0, self.count)) != nil {
                 return false
                 
-            } else {
+            }
+            else {
                 return true
             }
         }

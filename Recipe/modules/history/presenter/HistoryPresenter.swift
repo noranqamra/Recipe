@@ -8,7 +8,7 @@
 import Foundation
 class HistoryPresenter {
     
-    weak var view : HistoryInput?
+    private weak var view : HistoryInput?
     init(view : HistoryInput ){
         self.view = view
     }

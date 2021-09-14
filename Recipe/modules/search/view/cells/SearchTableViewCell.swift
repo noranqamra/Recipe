@@ -26,5 +26,12 @@ class SearchTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    func configure (recipeData : RecipeData) {
+        self.searchNameLabel.text = recipeData.label
+        let url = URL(string: recipeData.image ??  GenericString.EMPTY.rawValue)
+        self.searchImage.kf.setImage(with: url,options: [.cacheOriginalImage])
+        self.searchSourceLabel.text = recipeData.source
+        self.searchHealthLabel.text = recipeData.healthLabels.joined(separator: GenericString.DASH.rawValue)
+        }
     
 }

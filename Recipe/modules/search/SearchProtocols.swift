@@ -23,10 +23,12 @@ protocol SearchInput : class {
     func setViewControllerDelegates()
     func getSearchBarText () -> String
     func setSearchModel(searchModel : SearchModel)
+    func setViewEndEditing()
     func getSearchModel() -> SearchModel?
     func register()
     func resetIsRequestingNextPage()
     func resetSearchModel()
+    func setIsRequestingNextPage()
     func reloadTableView()
     func showNoResult()
     func hideNoResult()

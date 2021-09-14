@@ -19,4 +19,7 @@ extension DetailsPresenter : DetailsOutput{
     func viewDidLoad() {
         view?.fillRecipeData()
     }
+    func didTapShare(){
+        view?.showShareOptions()
+    }
 }

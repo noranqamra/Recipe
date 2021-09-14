@@ -28,11 +28,27 @@ class SearchPresenter {
                 print((value as? SearchModel)?._links.next.href)
                 if let response = value as? SearchModel{
                     self.view?.setSearchModel(searchModel: response)
+                    self.controlResultPreview (response : response)
+                }
+                else if let response = value as? Int , response == 0{
+                    self.controlResultPreview (response: nil)
                 }
                 self.view?.resetIsRequestingNextPage()
             }, searchKeyword: (view?.getSearchBarText())!, nextPageurl: nextPageurl, healthLabel: healthLabel )
+            
         }
        
+    }
+    private func controlResultPreview (response : SearchModel?){
+        if response?.hits.count ?? 0 > 0{
+            view?.hideNoResult()
+            view?.showResultTable()
+
+        }
+        else{
+            view?.showNoResult()
+            view?.hideResultTable()
+        }
     }
     func isAlphabet(searchBarText : String) -> Bool {
         do {

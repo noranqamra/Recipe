@@ -12,6 +12,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
     @IBOutlet weak var resultTableView: UITableView!
     @IBOutlet weak var historyContainerView: UIView!
     @IBOutlet weak var filterContainerView: UIView!
+    @IBOutlet weak var noSearchResult: UILabel!
     
     
     var presenter : SearchOutput?
@@ -87,12 +88,27 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
-    
-    
 }
 
 
 extension SearchViewController : SearchInput{
+    func showNoResult() {
+        noSearchResult.isHidden = false
+    }
+    
+    func hideNoResult() {
+        noSearchResult.isHidden = true
+    }
+    
+    func showResultTable() {
+        resultTableView.isHidden = false
+    }
+    
+    func hideResultTable() {
+        resultTableView.isHidden = true
+
+    }
+    
     func resetSearchModel() {
         searchModel = nil
     }

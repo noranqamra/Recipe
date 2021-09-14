@@ -27,5 +27,9 @@ protocol SearchInput : class {
     func resetIsRequestingNextPage()
     func resetSearchModel()
     func reloadTableView()
+    func showNoResult()
+    func hideNoResult()
+    func showResultTable()
+    func hideResultTable()
     
 }

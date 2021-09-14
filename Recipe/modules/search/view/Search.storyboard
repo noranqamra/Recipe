@@ -19,6 +19,12 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="23.%20Free%20Western%20Food%20App%20Background" translatesAutoresizingMaskIntoConstraints="NO" id="41L-s5-bgj">
                                 <rect key="frame" x="0.0" y="44" width="414" height="808"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Search Result" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xHK-aF-JET">
+                                <rect key="frame" x="128.5" y="463" width="157.5" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="yYM-Ub-L8j">
                                 <rect key="frame" x="0.0" y="50" width="414" height="56"/>
                                 <constraints>
@@ -114,6 +120,8 @@
                             <constraint firstItem="41L-s5-bgj" firstAttribute="centerY" secondItem="bCl-VX-umy" secondAttribute="centerY" id="JgH-tP-ANo"/>
                             <constraint firstItem="tBN-2i-8CZ" firstAttribute="bottom" secondItem="Nd5-nS-rmm" secondAttribute="bottom" id="Lbe-Pe-jrn"/>
                             <constraint firstItem="Nd5-nS-rmm" firstAttribute="top" secondItem="yYM-Ub-L8j" secondAttribute="bottom" constant="73" id="Pen-aO-xzE"/>
+                            <constraint firstItem="xHK-aF-JET" firstAttribute="centerX" secondItem="tBN-2i-8CZ" secondAttribute="centerX" id="QS0-XT-GY0"/>
+                            <constraint firstItem="xHK-aF-JET" firstAttribute="centerY" secondItem="tBN-2i-8CZ" secondAttribute="centerY" id="Uh9-V9-12V"/>
                             <constraint firstItem="Nd5-nS-rmm" firstAttribute="leading" secondItem="41L-s5-bgj" secondAttribute="leading" id="VeD-In-wtG"/>
                             <constraint firstItem="tBN-2i-8CZ" firstAttribute="trailing" secondItem="bPW-CG-7so" secondAttribute="trailing" id="VzI-8j-3gY"/>
                             <constraint firstItem="Nd5-nS-rmm" firstAttribute="leading" secondItem="tBN-2i-8CZ" secondAttribute="leading" id="cjV-nv-z11"/>
@@ -131,6 +139,7 @@
                     <connections>
                         <outlet property="filterContainerView" destination="hc0-4q-bjm" id="HNn-By-Ta5"/>
                         <outlet property="historyContainerView" destination="bPW-CG-7so" id="O4h-SG-DZP"/>
+                        <outlet property="noSearchResult" destination="xHK-aF-JET" id="feT-29-WPC"/>
                         <outlet property="resultTableView" destination="Nd5-nS-rmm" id="U6N-ry-dAM"/>
                         <outlet property="searchBar" destination="yYM-Ub-L8j" id="LpG-KE-Qnm"/>
                     </connections>

@@ -26,6 +26,9 @@ class NetworkManager {
                 print(response.value?.hits[0].recipe.label)
                 
             }
+            else{
+                completionHandler(0)
+            }
         }
     }
 }

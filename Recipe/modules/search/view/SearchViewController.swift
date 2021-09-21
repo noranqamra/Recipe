@@ -65,6 +65,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(GenericNumbers.ROW_HEIGHT.rawValue)
     }
+    func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        return text.isAlphabet()
+    }
 }
 
 

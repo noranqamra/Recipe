@@ -41,6 +41,10 @@ class DetailsViewController : UIViewController  {
     private func initPresenter(){
         presenter = DetailsPresenter(view: self)
     }
+    
+    @objc func didTap() {
+        recipeImage.presentFullScreenController(from: self)
+    }
 
 }
 extension DetailsViewController : DetailsInput{

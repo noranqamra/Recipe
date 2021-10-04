@@ -18,6 +18,7 @@ extension DetailsPresenter : DetailsOutput{
    
     func viewDidLoad() {
         view?.fillRecipeData()
+        view?.handleImageGesture()
     }
     func didTapShare(){
         view?.showShareOptions()

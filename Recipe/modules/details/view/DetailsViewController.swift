@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import Kingfisher
 import SafariServices
+import ImageSlideShow
 
 class DetailsViewController : UIViewController  {
     
@@ -43,13 +44,19 @@ class DetailsViewController : UIViewController  {
 
 }
 extension DetailsViewController : DetailsInput{
+    func handleImageGesture(){
+        let kingfisherSource = [KingfisherSource(urlString: recipeData?.image ?? "")!]
+        recipeImage.setImageInputs(kingfisherSource)
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(DetailsViewController.didTap))
+        recipeImage.addGestureRecognizer(gestureRecognizer)
+    }
     func getSearchModel() -> SearchModel? {
         return nil
     }
     func fillRecipeData(){
         recipeTitle.text = recipeData?.label
         let url = URL(string: recipeData?.image ??  GenericString.EMPTY.rawValue)
-        recipeImage.kf.setImage(with: url,options: [.cacheOriginalImage])
+//        recipeImage.kf.setImage(with: url,options: [.cacheOriginalImage])
         ingredientLines.text = recipeData?.ingredientLines.joined(separator: GenericString.NEW_LINE.rawValue)
     }
     func showShareOptions (){

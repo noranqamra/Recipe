@@ -9,41 +9,39 @@ import UIKit
 
 class HistoryViewController: UIViewController , UITableViewDelegate, UITableViewDataSource{
     @IBOutlet weak var historyTableView: UITableView!
-    @IBOutlet weak var historyContainerView: UIView!
-
-    var history: [String] = []
+    
+    private var presenter : HistoryOutput?
     override func viewDidLoad() {
         super.viewDidLoad()
-        historyTableView.delegate = self
-        historyTableView.dataSource = self
-        history = UserDefaults.getUserSearch()
-        historyTableView.reloadData()
+        initPresenter()
+        presenter?.viewDidLoad()
+        
         // Do any additional setup after loading the view.
+    }
+    private func initPresenter(){
+        presenter = HistoryPresenter(view: self)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return history.count
+        return UserDefaults.getUserSearch().count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell", for: indexPath )
-            cell.textLabel?.text = history[indexPath.row]
-            return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.HISTORY.rawValue, for: indexPath) as? HistoryCell
+        cell?.configure(indexPath: indexPath )
+        return cell ?? UITableViewCell()
         
         
         
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//            searchBar.text = history[indexPath.row]
-//            searchBarText = history[indexPath.row]
-//            historyTableView.isHidden = true
-//            presenter?.didTapSearchTextField()
+        presenter?.didSelectRowWith(text : UserDefaults.getUserSearch()[indexPath.row])
 
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return CGFloat(GenericNumbers.ROW_HEIGHT.rawValue)
     }
 
     /*
@@ -57,18 +55,22 @@ class HistoryViewController: UIViewController , UITableViewDelegate, UITableView
     */
 
 }
-extension UserDefaults {
-   static func setUserSearch(key: String) {
-        var array = getUserSearch()
-        if !array.contains(key) {
-            array.append(key)
-        }
-        if array.count > 10 { array.removeFirst() }
-        UserDefaults.standard.set(array, forKey: "SEARCHED_DATA")
-        
+
+extension HistoryViewController : HistoryInput{
+
+    
+    func setViewControllerDelegates() {
+        historyTableView.delegate = self
+        historyTableView.dataSource = self
     }
-    static func getUserSearch() -> [String] {
-        guard let array = UserDefaults.standard.object(forKey: "SEARCHED_DATA") as? [String] else { return [] }
-        return array
+    
+    func register() {
+        let cellNib = UINib(nibName: CellIdentifier.HISTORY.rawValue, bundle: nil)
+        historyTableView.register(cellNib, forCellReuseIdentifier: CellIdentifier.HISTORY.rawValue)
     }
+    
+    func fillSearchBarWithText(text : String){
+        (parent as? SearchViewController)?.searchBar.text = text
+    }
+
 }

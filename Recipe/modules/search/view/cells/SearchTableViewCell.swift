@@ -10,11 +10,8 @@ import UIKit
 class SearchTableViewCell: UITableViewCell {
 
 
-//    @IBOutlet weak var searchNaameLabel: UILabel!
-//    @IBOutlet weak var searchSourceLabel: UILabel!
-//    @IBOutlet weak var searchHealthLabel: UILabel!
-//    @IBOutlet weak var searchImage: UIImageView!
-        @IBOutlet weak var searchNameLabel: UILabel!
+
+    @IBOutlet weak var searchNameLabel: UILabel!
     @IBOutlet weak var searchSourceLabel: UILabel!
     @IBOutlet weak var searchHealthLabel: UILabel!
     @IBOutlet weak var searchImage: UIImageView!
@@ -29,13 +26,12 @@ class SearchTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    func configureCell (recipe : RecipeData?){
-        if let recipe = recipe {
-        self.searchNameLabel.text = recipe.label
-        let url = URL(string: recipe.image ??  "")
+    func configure (recipeData : RecipeData) {
+        self.searchNameLabel.text = recipeData.label
+        let url = URL(string: recipeData.image ??  GenericString.EMPTY.rawValue)
         self.searchImage.kf.setImage(with: url,options: [.cacheOriginalImage])
-        self.searchSourceLabel.text = recipe.source
-        self.searchHealthLabel.text = recipe.healthLabels.joined(separator: " - ")
-    }
-    }
+        self.searchSourceLabel.text = recipeData.source
+        self.searchHealthLabel.text = recipeData.healthLabels.joined(separator: GenericString.DASH.rawValue)
+        }
+    
 }

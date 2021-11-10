@@ -9,6 +9,7 @@ import Foundation
 struct SearchModel : Decodable {
     var _links : LinksData
     var hits : [HitsData]
+    var count : Int
 }
 struct LinksData : Decodable {
     var next : NextData
@@ -24,4 +25,7 @@ struct RecipeData : Decodable{
     var image : String
     var source : String
     var healthLabels : [String]
+    var ingredientLines : [String]
+    var url : String
+    var shareAs : String
 }

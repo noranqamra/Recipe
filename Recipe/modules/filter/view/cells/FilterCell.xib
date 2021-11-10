@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="FilterCell" customModule="Recipe" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="100" height="50"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="100" height="50"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fOU-YB-4Y1">
+                        <rect key="frame" x="0.0" y="0.0" width="100" height="50"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All" textAlignment="natural" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nze-S0-gNg">
+                                <rect key="frame" x="41" y="16" width="18.5" height="18"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Nze-S0-gNg" firstAttribute="centerX" secondItem="fOU-YB-4Y1" secondAttribute="centerX" id="DRR-DX-bso"/>
+                            <constraint firstItem="Nze-S0-gNg" firstAttribute="centerY" secondItem="fOU-YB-4Y1" secondAttribute="centerY" id="dtI-FN-zln"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="fOU-YB-4Y1" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" id="1fh-f9-TVb"/>
+                <constraint firstItem="fOU-YB-4Y1" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="C83-6H-hIh"/>
+                <constraint firstItem="fOU-YB-4Y1" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" id="Khv-ga-Afd"/>
+                <constraint firstItem="fOU-YB-4Y1" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="bHe-Or-Lqw"/>
+            </constraints>
+            <connections>
+                <outlet property="filterNameLabel" destination="Nze-S0-gNg" id="Oi3-gN-cl9"/>
+            </connections>
+            <point key="canvasLocation" x="-400" y="83"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
